@@ -133,7 +133,6 @@ function default_settings() {
   MAC="$GEN_MAC"
   VLAN=""
   MTU=""
-  START_VM="no"
   echo -e "${DGN}Using Virtual Machine ID: ${BGN}${VMID}${CL}"
   echo -e "${DGN}Using Machine Type: ${BGN}i440fx${CL}"
   echo -e "${DGN}Using Disk Cache: ${BGN}None${CL}"
@@ -145,7 +144,6 @@ function default_settings() {
   echo -e "${DGN}Using MAC Address: ${BGN}${MAC}${CL}"
   echo -e "${DGN}Using VLAN: ${BGN}Default${CL}"
   echo -e "${DGN}Using Interface MTU Size: ${BGN}Default${CL}"
-  echo -e "${DGN}Start VM when completed: ${BGN}no${CL}"
   echo -e "${BL}Creating an Ubuntu 24.04 VM using the above default settings${CL}"
 }
 
@@ -297,14 +295,6 @@ function advanced_settings() {
     exit-script
   fi
 
-  if (whiptail --backtitle "Proxmox VE Helper Scripts" --title "START VIRTUAL MACHINE" --yesno "Start VM when completed?" 10 58); then
-    echo -e "${DGN}Start VM when completed: ${BGN}yes${CL}"
-    START_VM="yes"
-  else
-    echo -e "${DGN}Start VM when completed: ${BGN}no${CL}"
-    START_VM="no"
-  fi
-
   if (whiptail --backtitle "Proxmox VE Helper Scripts" --title "ADVANCED SETTINGS COMPLETE" --yesno "Ready to create an Ubuntu 24.04 VM?" --no-button Do-Over 10 58); then
     echo -e "${RD}Creating an Ubuntu 24.04 VM using the above advanced settings${CL}"
   else
@@ -408,11 +398,6 @@ qm set $VMID \
   <a href='https://ko-fi.com/proxmoxhelperscripts'><img src='https://img.shields.io/badge/&#x2615;-Buy me a coffee-blue' /></a>
   </div>" >/dev/null
 msg_ok "Created a Ubuntu 24.04 VM ${CL}${BL}(${HN})"
-if [ "$START_VM" == "yes" ]; then
-  msg_info "Starting Ubuntu 24.04 VM"
-  qm start $VMID
-  msg_ok "Started Ubuntu 24.04 VM"
-fi
 msg_ok "Completed Successfully!\n"
 echo -e "Setup Cloud-Init before starting \n
 More info at https://github.com/tteck/Proxmox/discussions/2072 \n"
