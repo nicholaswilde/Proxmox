@@ -29,6 +29,7 @@ $STD apt-get install -y \
   g++ \
   unpaper \
   ocrmypdf \
+  poppler-utils \
   wget \
   openssh-server
 msg_ok "Installed Dependencies"
