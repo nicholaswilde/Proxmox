@@ -72,7 +72,6 @@ build_container
 description
 
 msg_info "Setting Container to Normal Resources"
-pct start $CTID
 pct set $CTID -memory 512
 pct set $CTID -cores 1
 msg_ok "Set Container to Normal Resources"
