@@ -32,7 +32,7 @@ msg_info "Installing PostgreSQL"
 $STD apt-get update
 $STD apt-get install -y postgresql
 
-cat <<EOF >/etc/postgresql/16/main/pg_hba.conf
+cat <<EOF >/etc/postgresql/17/main/pg_hba.conf
 # PostgreSQL Client Authentication Configuration File
 local   all             postgres                                peer
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
@@ -51,7 +51,7 @@ host    replication     all             127.0.0.1/32            scram-sha-256
 host    replication     all             ::1/128                 scram-sha-256
 EOF
 
-cat <<EOF >/etc/postgresql/16/main/postgresql.conf
+cat <<EOF >/etc/postgresql/17/main/postgresql.conf
 # -----------------------------
 # PostgreSQL configuration file
 # -----------------------------
@@ -60,10 +60,10 @@ cat <<EOF >/etc/postgresql/16/main/postgresql.conf
 # FILE LOCATIONS
 #------------------------------------------------------------------------------
 
-data_directory = '/var/lib/postgresql/16/main'       
-hba_file = '/etc/postgresql/16/main/pg_hba.conf'     
-ident_file = '/etc/postgresql/16/main/pg_ident.conf'   
-external_pid_file = '/var/run/postgresql/16-main.pid'                   
+data_directory = '/var/lib/postgresql/17/main'       
+hba_file = '/etc/postgresql/17/main/pg_hba.conf'     
+ident_file = '/etc/postgresql/17/main/pg_ident.conf'   
+external_pid_file = '/var/run/postgresql/17-main.pid'                   
 
 #------------------------------------------------------------------------------
 # CONNECTIONS AND AUTHENTICATION
@@ -109,7 +109,7 @@ log_timezone = 'Etc/UTC'
 # PROCESS TITLE
 #------------------------------------------------------------------------------
 
-cluster_name = '16/main'                
+cluster_name = '17/main'                
 
 #------------------------------------------------------------------------------
 # CLIENT CONNECTION DEFAULTS
