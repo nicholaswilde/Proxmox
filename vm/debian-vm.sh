@@ -396,7 +396,7 @@ qm create $VMID -agent 1${MACHINE} -tablet 0 -localtime 1 -bios ovmf -cores $COR
 pvesm alloc $STORAGE $VMID $DISK0 4M 1>&/dev/null
 qm importdisk $VMID ${FILE} $STORAGE ${DISK_IMPORT:-} 1>&/dev/null
 qm set $VMID \
-  -efidisk0 ${DISK0_REF}${FORMAT} \
+  -efidisk0 ${DISK0_REF},efitype=4m,size=64M \
   -scsi0 ${DISK1_REF},${DISK_CACHE}${THIN}size=2G \
   -boot order=scsi0 \
   -serial0 socket \
