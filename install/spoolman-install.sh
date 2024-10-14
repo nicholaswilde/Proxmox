@@ -38,7 +38,6 @@ rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python3"
 
 msg_info "Installing Spoolman"
-cd /opt
 RELEASE=$(wget -q https://github.com/Donkie/Spoolman/releases/latest -O - | grep "title>Release" | cut -d " " -f 4)
 wget -q https://github.com/Donkie/Spoolman/releases/download/$RELEASE/spoolman.zip
 unzip -q spoolman.zip -d spoolman
