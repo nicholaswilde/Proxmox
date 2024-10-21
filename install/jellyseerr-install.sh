@@ -19,7 +19,7 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y git
 $STD apt-get install -y ca-certificates
-$STD apt-get install -y gnupg
+$STD apt-get install -y gpg
 $STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
@@ -34,17 +34,18 @@ $STD apt-get update
 $STD apt-get install -y nodejs
 msg_ok "Installed Node.js"
 
-msg_info "Installing Yarn"
-$STD npm install -g yarn
-msg_ok "Installed Yarn"
+msg_info "Installing pnpm"
+$STD npm install -g pnpm
+msg_ok "Installed pnpm"
 
 msg_info "Installing Jellyseerr (Patience)"
 git clone -q https://github.com/Fallenbagel/jellyseerr.git /opt/jellyseerr
 cd /opt/jellyseerr
 $STD git checkout main
-CYPRESS_INSTALL_BINARY=0 yarn install --frozen-lockfile --network-timeout 1000000 &>/dev/null
-$STD yarn install
-$STD yarn build
+export CYPRESS_INSTALL_BINARY=0
+$STD pnpm install --frozen-lockfile
+export NODE_OPTIONS="--max-old-space-size=3072"
+$STD pnpm build
 mkdir -p /etc/jellyseerr/
 cat <<EOF >/etc/jellyseerr/jellyseerr.conf
 PORT=5055
@@ -64,7 +65,7 @@ EnvironmentFile=/etc/jellyseerr/jellyseerr.conf
 Environment=NODE_ENV=production
 Type=exec
 WorkingDirectory=/opt/jellyseerr
-ExecStart=/usr/bin/yarn start
+ExecStart=/usr/bin/node dist/index.js
 
 [Install]
 WantedBy=multi-user.target
