@@ -21,7 +21,9 @@ $STD apt-get install -y \
   lsb-release \
   curl \
   gnupg \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing MySQL"

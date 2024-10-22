@@ -25,7 +25,9 @@ $STD apt-get install -y \
   libsasl2-dev \
   procps \
   dnsutils \
-  ripgrep
+  ripgrep \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
