@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
@@ -63,9 +63,9 @@ if [[ "${RELEASE}" != "$(cat /opt/${APP}_version.txt)" ]] || [[ ! -f /opt/${APP}
   msg_ok "Stopped ${APP}"
 
   msg_info "Updating $APP to v${RELEASE}"
-  wget -q https://github.com/juanfont/headscale/releases/download/v${RELEASE}/headscale_${RELEASE}_linux_amd64.deb
-  dpkg -i headscale_${RELEASE}_linux_amd64.deb
-  rm headscale_${RELEASE}_linux_amd64.deb
+  wget -q https://github.com/juanfont/headscale/releases/download/v${RELEASE}/headscale_${RELEASE}_linux_arm64.deb
+  dpkg -i headscale_${RELEASE}_linux_arm64.deb
+  rm headscale_${RELEASE}_linux_arm64.deb
   echo "${RELEASE}" >/opt/${APP}_version.txt
   msg_ok "Updated $APP to ${RELEASE}"
   
