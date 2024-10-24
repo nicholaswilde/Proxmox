@@ -82,57 +82,6 @@ EOF
     ;;
   esac
 
-  CHOICE=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "PVE-NO-SUBSCRIPTION" --menu "The 'pve-no-subscription' repository provides access to all of the open-source components of Proxmox VE.\n \nEnable 'pve-no-subscription' repository?" 14 58 2 \
-    "yes" " " \
-    "no" " " 3>&2 2>&1 1>&3)
-  case $CHOICE in
-  yes)
-    msg_info "Enabling 'pve-no-subscription' repository"
-    cat <<EOF >/etc/apt/sources.list.d/pve-install-repo.list
-deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
-EOF
-    msg_ok "Enabled 'pve-no-subscription' repository"
-    ;;
-  no)
-    msg_error "Selected no to Enabling 'pve-no-subscription' repository"
-    ;;
-  esac
-
-    CHOICE=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "CEPH PACKAGE REPOSITORIES" --menu "The 'Ceph Package Repositories' provides access to both the 'no-subscription' and 'enterprise' repositories (initially disabled).\n \nCorrect 'ceph package sources?" 14 58 2 \
-      "yes" " " \
-      "no" " " 3>&2 2>&1 1>&3)
-    case $CHOICE in
-    yes)
-      msg_info "Correcting 'ceph package repositories'"
-      cat <<EOF >/etc/apt/sources.list.d/ceph.list
-# deb https://enterprise.proxmox.com/debian/ceph-quincy bookworm enterprise
-# deb http://download.proxmox.com/debian/ceph-quincy bookworm no-subscription
-# deb https://enterprise.proxmox.com/debian/ceph-reef bookworm enterprise
-# deb http://download.proxmox.com/debian/ceph-reef bookworm no-subscription
-EOF
-      msg_ok "Corrected 'ceph package repositories'"
-      ;;
-    no)
-      msg_error "Selected no to Correcting 'ceph package repositories'"
-      ;;
-    esac
-
-  CHOICE=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "PVETEST" --menu "The 'pvetest' repository can give advanced users access to new features and updates before they are officially released.\n \nAdd (Disabled) 'pvetest' repository?" 14 58 2 \
-    "yes" " " \
-    "no" " " 3>&2 2>&1 1>&3)
-  case $CHOICE in
-  yes)
-    msg_info "Adding 'pvetest' repository and set disabled"
-    cat <<EOF >/etc/apt/sources.list.d/pvetest-for-beta.list
-# deb http://download.proxmox.com/debian/pve bookworm pvetest
-EOF
-    msg_ok "Added 'pvetest' repository"
-    ;;
-  no)
-    msg_error "Selected no to Adding 'pvetest' repository"
-    ;;
-  esac
-
   if [[ ! -f /etc/apt/apt.conf.d/no-nag-script ]]; then
     CHOICE=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "SUBSCRIPTION NAG" --menu "This will disable the nag message reminding you to purchase a subscription every time you log in to the web interface.\n \nDisable subscription nag?" 14 58 2 \
       "yes" " " \
