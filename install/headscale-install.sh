@@ -33,7 +33,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm headscale_${RELEASE}_linux_amd64.deb
+rm headscale_${RELEASE}_linux_arm64.deb
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"
