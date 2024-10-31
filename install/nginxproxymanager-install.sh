@@ -29,7 +29,8 @@ $STD apt-get -y install \
   build-essential \
   git \
   wget \
-  openssh-server
+  openssh-server \
+  golang
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
