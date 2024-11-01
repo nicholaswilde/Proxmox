@@ -29,8 +29,7 @@ $STD apt-get -y install \
   build-essential \
   git \
   wget \
-  openssh-server \
-  golang
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
@@ -39,11 +38,11 @@ $STD apt-get install -y \
   python3-dev \
   python3-pip \
   python3-venv \
-  python3-cffi
-$STD pip3 install pip --upgrade
-$STD pip3 install certbot certbot-dns-multi
+  python3-cffi \
+  python3-certbot \
+  python3-certbot-dns-cloudflare
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD python3 -m venv /opt/certbot/
-ln -s /usr/local/bin/certbot /usr/bin/certbot
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
 
