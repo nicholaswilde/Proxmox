@@ -42,7 +42,7 @@ $STD apt-get install -y --no-install-recommends \
   openssh-server
 msg_ok "Installed Dependencies"
 
-msg_info "Installing Python3 Dependencies"
+msg_info "Installing Python3 Dependencies (Patience)"
 $STD apt-get install -y --no-install-recommends \
   python3 \
   python3-pip \
@@ -54,7 +54,6 @@ msg_ok "Installed Python3 Dependencies"
 msg_info "Installing OCR Dependencies (Patience)"
 $STD apt-get install -y --no-install-recommends \
   unpaper \
-  ghostscript \
   icc-profiles-free \
   qpdf \
   liblept5 \
@@ -63,6 +62,14 @@ $STD apt-get install -y --no-install-recommends \
   zlib1g \
   tesseract-ocr \
   tesseract-ocr-eng
+  
+cd /tmp
+wget -q https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.gz
+$STD tar -xzf ghostscript-10.04.0.tar.gz
+cd ghostscript-10.04.0
+$STD ./configure
+$STD make
+$STD sudo make install
 msg_ok "Installed OCR Dependencies"
 
 msg_info "Installing JBIG2"
@@ -224,6 +231,7 @@ customize
 
 msg_info "Cleaning up"
 rm -rf /opt/paperless/docker
+rm -rf /tmp/ghostscript*
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

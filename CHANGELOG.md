@@ -8,10 +8,41 @@
 <h3 align="center">All notable changes to this project will be documented in this file.</h3>
 
 > [!CAUTION]
-Exercise vigilance regarding copycat or coat-tailing sites that seek to exploit the project's popularity for potentially malicious purposes. It is imperative to rely solely on information from https://Helper-Scripts.com/ or https://tteck.github.io/Proxmox/ for accurate and trustworthy content.
+Exercise vigilance regarding copycat or coat-tailing sites that seek to exploit the project's popularity for potentially malicious purposes.
 
 > [!NOTE]
 All LXC instances created using this repository come pre-installed with Midnight Commander, which is a command-line tool (`mc`) that offers a user-friendly file and directory management interface for the terminal environment.
+
+## 2024-10-27
+
+### Changed
+
+- **Open WebUI LXC** [(Commit)](https://github.com/tteck/Proxmox/commit/8a21f6e7f025a911865395d4c0fa9a001bd0d512)
+  - Refactor Script to add an option to install Ollama.
+
+## 2024-10-26
+
+### Changed
+
+- **AdventureLog LXC** [(View Source)](https://github.com/tteck/Proxmox/blob/main/install/adventurelog-install.sh)
+  - NEW Script
+
+## 2024-10-25
+
+### Changed
+
+- **Zoraxy LXC** [(Commit)](https://github.com/tteck/Proxmox/commit/468a5d367ded4cf453a1507452e112ac3e234e2a)
+  - Switch built from source to a pre-compiled binary version.
+  - Breaking Change
+
+## 2024-10-23
+
+### Changed
+
+- **Wallos LXC** [(View Source)](https://github.com/tteck/Proxmox/blob/main/install/wallos-install.sh)
+  - NEW Script
+- **Open WebUI LXC** [(View Source)](https://github.com/tteck/Proxmox/blob/main/install/openwebui-install.sh)
+  - NEW Script
 
 ## 2024-10-19
 

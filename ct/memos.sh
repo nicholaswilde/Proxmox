@@ -2,28 +2,27 @@
 source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2024 tteck
 # Author: tteck
-# Co-Author: havardthom
+# Co-Author: MickLesk (Canbiz)
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 function header_info {
 clear
-cat <<"EOF"     
-   ____                      _       __     __    __  ______
-  / __ \____  ___  ____     | |     / /__  / /_  / / / /  _/
- / / / / __ \/ _ \/ __ \    | | /| / / _ \/ __ \/ / / // /
-/ /_/ / /_/ /  __/ / / /    | |/ |/ /  __/ /_/ / /_/ // /
-\____/ .___/\___/_/ /_/     |__/|__/\___/_.___/\____/___/
-    /_/
-
+cat <<"EOF"
+    __  ___                         
+   /  |/  /__  ____ ___  ____  _____
+  / /|_/ / _ \/ __ `__ \/ __ \/ ___/
+ / /  / /  __/ / / / / / /_/ (__  ) 
+/_/  /_/\___/_/ /_/ /_/\____/____/  
+                                    
 EOF
 }
 header_info
 echo -e "Loading..."
-APP="Open WebUI"
-var_disk="16"
-var_cpu="4"
-var_ram="4096"
+APP="Memos"
+var_disk="7"
+var_cpu="2"
+var_ram="2048"
 var_os="debian"
 var_version="12"
 variables
@@ -56,25 +55,29 @@ function default_settings() {
 
 function update_script() {
 header_info
-if [[ ! -d /opt/open-webui ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
-msg_info "Updating ${APP} (Patience)"
-cd /opt/open-webui
+if [[ ! -d /opt/memos ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+msg_info "Updating $APP (Patience)"
+cd /opt/memos
 output=$(git pull --no-rebase)
 if echo "$output" | grep -q "Already up to date."
 then
   msg_ok "$APP is already up to date."
   exit
 fi
-systemctl stop open-webui.service
-npm install &>/dev/null
-export NODE_OPTIONS="--max-old-space-size=3584"
-npm run build &>/dev/null
-cd ./backend
-pip install -r requirements.txt -U &>/dev/null
-systemctl start open-webui.service
-msg_ok "Updated Successfully"
+systemctl stop memos
+cd /opt/memos/web 
+pnpm i --frozen-lockfile &>/dev/null
+pnpm build &>/dev/null
+cd /opt/memos
+mkdir -p /opt/memos/server/dist
+cp -r web/dist/* /opt/memos/server/dist/
+cp -r web/dist/* /opt/memos/server/router/frontend/dist/ 
+go build -o /opt/memos/memos -tags=embed bin/memos/main.go &>/dev/null
+systemctl start memos
+msg_ok "Updated $APP"
 exit
 }
+
 
 start
 build_container
@@ -82,4 +85,4 @@ description
 
 msg_ok "Completed Successfully!\n"
 echo -e "${APP} should be reachable by going to the following URL.
-         ${BL}http://${IP}:8080${CL} \n"
+         ${BL}http://${IP}:9030${CL} \n"
