@@ -42,7 +42,7 @@ $STD pip install -r /opt/flaresolverr/requirements.txt
 msg_ok "Installed FlareSolverr"
 
 msg_info "Installing Chrome Webdriver"
-wget -q https://github.com/electron/electron/releases/download/v32.0.1/chromedriver-v33.2.0-linux-arm64.zip -O /opt/flaresolverr/webdriver.zip
+wget -q https://github.com/electron/electron/releases/download/v33.2.0/chromedriver-v33.2.0-linux-arm64.zip -O /opt/flaresolverr/webdriver.zip
 cd /opt/flaresolverr
 unzip -q webdriver.zip chromedriver
 sed -i 's|^PATCHED_DRIVER_PATH = None|PATCHED_DRIVER_PATH = "/opt/flaresolverr/chromedriver"|' ./src/utils.py
