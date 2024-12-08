@@ -29,7 +29,6 @@ wget -q https://github.com/prometheus/prometheus/releases/download/v${RELEASE}/p
 tar -xf prometheus-${RELEASE}.linux-arm64.tar.gz
 cd prometheus-${RELEASE}.linux-arm64
 mv prometheus promtool /usr/local/bin/
-mv consoles/ console_libraries/ /etc/prometheus/
 mv prometheus.yml /etc/prometheus/prometheus.yml
 echo "${RELEASE}" >/opt/${APPLICATION}_version.txt
 msg_ok "Installed Prometheus"
