@@ -31,7 +31,6 @@ $STD apt-get -y install \
   wget \
   openssh-server
 msg_ok "Installed Dependencies"
-
 msg_info "Installing Python Dependencies"
 $STD apt-get install -y \
   python3 \
@@ -41,7 +40,7 @@ $STD apt-get install -y \
   python3-cffi \
   python3-certbot \
   python3-certbot-dns-cloudflare
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
+$STD pip3 install certbot-dns-multi
 $STD python3 -m venv /opt/certbot/
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
@@ -50,18 +49,16 @@ VERSION="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release)"
 
 msg_info "Installing Openresty"
 wget -qO - https://openresty.org/package/pubkey.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/openresty-archive-keyring.gpg
-echo -e "deb [arch=arm64] http://openresty.org/package/arm64/ubuntu jammy main" >/etc/apt/sources.list.d/openresty.list
+echo -e "deb http://openresty.org/package/debian bullseye openresty" >/etc/apt/sources.list.d/openresty.list
 $STD apt-get update
 $STD apt-get -y install openresty
 msg_ok "Installed Openresty"
 
-msg_info "Setting up Node.js Repository"
-curl -sL https://deb.nodesource.com/setup_16.x | $STD bash -
-msg_ok "Set up Node.js Repository"
-
 msg_info "Installing Node.js"
-$STD apt-get update
-$STD apt-get install -y nodejs
+$STD bash <(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh)
+source ~/.bashrc
+$STD nvm install 16.20.2
+ln -sf /root/.nvm/versions/node/v16.20.2/bin/node /usr/bin/node
 msg_ok "Installed Node.js"
 
 msg_info "Installing pnpm"
@@ -84,7 +81,7 @@ else
   cd ./nginx-proxy-manager-${RELEASE}
   msg_ok "Downloaded Nginx Proxy Manager v${RELEASE}"
 fi
-msg_info "Setting up Enviroment"
+msg_info "Setting up Environment"
 ln -sf /usr/bin/python3 /usr/bin/python
 ln -sf /usr/bin/certbot /opt/certbot/bin/certbot
 ln -sf /usr/local/openresty/nginx/sbin/nginx /usr/sbin/nginx
