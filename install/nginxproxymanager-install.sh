@@ -41,7 +41,7 @@ $STD apt-get install -y \
   python3-certbot \
   python3-certbot-dns-cloudflare
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
-$STD pip3 install certbot-dns-multi
+$STD pip3 install certbot-dns-multi==4.15.0
 $STD python3 -m venv /opt/certbot/
 msg_ok "Installed Python Dependencies"
 
