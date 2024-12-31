@@ -169,23 +169,60 @@ msg_ok "Using ${BL}$TEMPLATE_STORAGE${CL} ${GN}for Template Storage."
 CONTAINER_STORAGE=$(select_storage container) || exit
 msg_ok "Using ${BL}$CONTAINER_STORAGE${CL} ${GN}for Container Storage."
 
-# Update LXC template list
-msg_info "Updating LXC Template List"
-pveam update >/dev/null
-msg_ok "Updated LXC Template List"
-
 # Get LXC template string
-TEMPLATE_SEARCH=${PCT_OSTYPE}-${PCT_OSVERSION:-}
-mapfile -t TEMPLATES < <(pveam available -section system | sed -n "s/.*\($TEMPLATE_SEARCH.*\)/\1/p" | sort -t - -k 2 -V)
-[ ${#TEMPLATES[@]} -gt 0 ] || exit "Unable to find a template when searching for '$TEMPLATE_SEARCH'."
-TEMPLATE="${TEMPLATES[-1]}"
+if [ $PCT_OSTYPE = debian ]; then
+  if [ $PCT_OSVERSION = 11 ]; then
+    TEMPLATE_VARIENT=bullseye
+  else
+    TEMPLATE_VARIENT=bookworm
+  fi
+elif [ $PCT_OSTYPE = alpine ]; then
+  TEMPLATE_VARIENT=3.19
+else
+  if [ $PCT_OSVERSION = 20.04 ]; then
+    TEMPLATE_VARIENT=focal
+  elif [ $PCT_OSVERSION = 24.04 ]; then
+    TEMPLATE_VARIENT=noble
+  else
+    TEMPLATE_VARIENT=jammy
+  fi
+fi
 
-# Download LXC template if needed
-if ! pveam list $TEMPLATE_STORAGE | grep -q $TEMPLATE; then
-  msg_info "Downloading LXC Template"
-  pveam download $TEMPLATE_STORAGE $TEMPLATE >/dev/null ||
-    exit "A problem occured while downloading the LXC template."
-  msg_ok "Downloaded LXC Template"
+if [ -d "/var/lib/vz/template/cache" ]; then 
+  TEMPLATE=$PCT_OSTYPE-$TEMPLATE_VARIENT-rootfs.tar.xz
+  # Download template if needed
+  if [ ! -f "/var/lib/vz/template/cache/$TEMPLATE" ]; then
+    if [ $PCT_OSTYPE = debian ]; then
+      msg_info "Downloading LXC Template"
+      wget -q $(curl -s https://api.github.com/repos/asylumexp/debian-ifupdown2-lxc/releases/latest | grep download | grep debian-$TEMPLATE_VARIENT-arm64-rootfs.tar.xz | cut -d\" -f4) -O /var/lib/vz/template/cache/$TEMPLATE -q || exit "A problem occured while downloading the LXC template."
+      msg_ok "Downloaded LXC Template"
+    else
+      templateurl="https://jenkins.linuxcontainers.org/job/image-$PCT_OSTYPE/architecture=arm64,release=$TEMPLATE_VARIENT,variant=default/lastStableBuild/artifact/rootfs.tar.xz"
+      msg_info "Downloading LXC Template"
+      wget $templateurl -O /var/lib/vz/template/cache/$TEMPLATE -q || exit "A problem occured while downloading the LXC template."
+      msg_ok "Downloaded LXC Template"
+    fi
+  fi
+else
+  # Update LXC template list
+  msg_info "Updating LXC Template List"
+  pveam update >/dev/null
+  msg_ok "Updated LXC Template List"
+  if [ $PCT_OSTYPE = debian ]; then
+    msg_error "Debian unsupported with this download method. Exiting."
+  elif [ $PCT_OSTYPE = alpine]; then
+    $TEMPLATE_VARIENT = 3.18
+  fi
+
+  TEMPLATE="$(pveam available | grep -E "arm64.*$PCT_OSTYPE-$TEMPLATE_VARIENT" | sed 's/arm64[[:space:]]*//')"
+
+  # Download LXC template if needed
+  if ! pveam list $TEMPLATE_STORAGE | grep -F $TEMPLATE > /dev/null; then
+    msg_info "Downloading LXC Template"
+    pveam download $TEMPLATE_STORAGE $TEMPLATE >/dev/null ||
+      exit "A problem occured while downloading the LXC template."
+    msg_ok "Downloaded LXC Template"
+  fi
 fi
 
 # Combine all options
