@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,8 +18,6 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gnupg
-$STD apt-get install -y openssh-server
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Syncthing"

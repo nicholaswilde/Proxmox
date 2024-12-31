@@ -2,8 +2,9 @@
 
 # Copyright (c) 2021-2024 tteck
 # Author: tteck
+# Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/gnmyt/myspeed
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -21,9 +22,7 @@ $STD apt-get install -y \
   make \
   gpg \
   ca-certificates \
-  mc \
-  wget \
-  openssh-server
+  mc
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
   clear
@@ -99,6 +99,15 @@ function pve_check() {
     sleep 2
     exit
 fi
+}
+
+function arch_check() {
+  if [ "$(dpkg --print-architecture)" != "amd64" ]; then
+    msg_error "This script will not work with PiMox! \n"
+    echo -e "Exiting..."
+    sleep 2
+    exit
+  fi
 }
 
 function ssh_check() {
@@ -327,6 +336,7 @@ function start_script() {
 }
 
 check_root
+arch_check
 pve_check
 ssh_check
 start_script
@@ -360,7 +370,7 @@ fi
 msg_ok "Using ${CL}${BL}$STORAGE${CL} ${GN}for Storage Location."
 msg_ok "Virtual Machine ID is ${CL}${BL}$VMID${CL}."
 msg_info "Retrieving the URL for the Ubuntu 22.04 Disk Image"
-URL=https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img
+URL=https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 sleep 2
 msg_ok "${CL}${BL}${URL}${CL}"
 wget -q --show-progress $URL
@@ -401,11 +411,11 @@ qm set $VMID \
   -ide2 ${STORAGE}:cloudinit \
   -boot order=scsi0 \
   -serial0 socket \
-  -description "<div align='center'><a href='https://pimox-scripts.com'><img src='https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/images/logo-81x112.png'/></a>
+  -description "<div align='center'><a href='https://Helper-Scripts.com'><img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png'/></a>
 
   # Ubuntu 22.04 VM
 
-  <a href='https://ko-fi.com/proxmoxhelperscripts'><img src='https://img.shields.io/badge/&#x2615;-Buy me a coffee-blue' /></a>
+  <a href='https://ko-fi.com/D1D7EP4GF'><img src='https://img.shields.io/badge/&#x2615;-Buy me a coffee-blue' /></a>
   </div>" >/dev/null
 msg_ok "Created a Ubuntu 22.04 VM ${CL}${BL}(${HN})"
 if [ "$START_VM" == "yes" ]; then

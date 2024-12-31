@@ -1,9 +1,10 @@
+
 #!/usr/bin/env bash
 
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -13,30 +14,29 @@ setting_up_container
 network_check
 update_os
 
-cpu_info=$(lscpu)
-
-if ! echo "$cpu_info" | grep -q 'asimdrdm\|asimdhf\|dotprod\|fp16'; then
-    msg_error "This machine does not support ARMv8.2-A."
-    exit
-fi
-
 msg_info "Installing Dependencies"
 $STD apt-get install -y gnupg
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
-msg_info "Installing MongoDB"
-wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | gpg --dearmor >/usr/share/keyrings/mongodb-server-7.0.gpg
-echo "deb [ arch=arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu $(grep '^VERSION_CODENAME=' /etc/os-release | cut -d'=' -f2)/mongodb-org/7.0 multiverse"
+# Abfrage für die MongoDB-Version
+read -p "Do you want to install MongoDB 8.0 instead of 7.0? [y/N]: " install_mongodb_8
+if [[ "$install_mongodb_8" =~ ^[Yy]$ ]]; then
+  MONGODB_VERSION="8.0"
+else
+  MONGODB_VERSION="7.0"
+fi
+
+msg_info "Installing MongoDB $MONGODB_VERSION"
+wget -qO- https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | gpg --dearmor >/usr/share/keyrings/mongodb-server-${MONGODB_VERSION}.gpg
+echo "deb [signed-by=/usr/share/keyrings/mongodb-server-${MONGODB_VERSION}.gpg] http://repo.mongodb.org/apt/debian $(grep '^VERSION_CODENAME=' /etc/os-release | cut -d'=' -f2)/mongodb-org/${MONGODB_VERSION} main" >/etc/apt/sources.list.d/mongodb-org-${MONGODB_VERSION}.list
 $STD apt-get update
 $STD apt-get install -y mongodb-org
 sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
 systemctl enable -q --now mongod.service
-msg_ok "Installed MongoDB"
+msg_ok "Installed MongoDB $MONGODB_VERSION"
 
 motd_ssh
 customize

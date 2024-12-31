@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,8 +17,6 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Blocky"
@@ -27,7 +25,7 @@ if systemctl is-active systemd-resolved > /dev/null 2>&1; then
 fi
 mkdir /opt/blocky
 RELEASE=$(curl -s https://api.github.com/repos/0xERR0R/blocky/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-wget -qO- https://github.com/0xERR0R/blocky/releases/download/v${RELEASE}/blocky_v${RELEASE}_Linux_arm64.tar.gz | tar -xzf - -C /opt/blocky/
+wget -qO- https://github.com/0xERR0R/blocky/releases/download/v${RELEASE}/blocky_v${RELEASE}_Linux_x86_64.tar.gz | tar -xzf - -C /opt/blocky/
 
 cat <<EOF >/opt/blocky/config.yml
 upstream:

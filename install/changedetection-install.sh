@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -44,9 +44,7 @@ $STD apt-get install -y \
   xdg-utils \
   xvfb \
   ca-certificates \
-  gnupg \
-  wget \
-  openssh-server
+  gnupg
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"
@@ -85,7 +83,6 @@ $STD npm prune production --prefix /opt/browserless
 msg_ok "Installed Browserless & Playwright"
 
 msg_info "Installing Font Packages"
-DEBIAN_FRONTEND=noninteractive
 $STD apt-get install -y \
   fontconfig \
   libfontconfig1 \

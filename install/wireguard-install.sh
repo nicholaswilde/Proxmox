@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,8 +18,6 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y git
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing WireGuard"
@@ -37,6 +35,19 @@ $STD ./wgd.sh install
 echo "net.ipv4.ip_forward=1" >>/etc/sysctl.conf
 $STD sysctl -p /etc/sysctl.conf
 msg_ok "Installed WGDashboard"
+
+msg_info "Create Example Config for WGDashboard"
+private_key=$(wg genkey)
+cat <<EOF >/etc/wireguard/wg0.conf 
+[Interface]
+PrivateKey = ${private_key}
+Address = 10.0.0.1/24
+SaveConfig = true
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE;
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE;
+ListenPort = 51820
+EOF
+msg_ok "Created Example Config for WGDashboard"
 
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/wg-dashboard.service

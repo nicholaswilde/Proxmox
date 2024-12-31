@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -31,10 +31,7 @@ $STD apt-get -y install \
   nmap \
   zip \
   aria2 \
-  wakeonlan \
-  wget \
-  cron \
-  openssh-server
+  wakeonlan
 msg_ok "Installed Dependencies"
 
 msg_info "Installing PHP Dependencies"
@@ -70,7 +67,7 @@ mv /var/www/html/index.lighttpd.html /var/www/html/index.lighttpd.html.old
 ln -s /usr/share/ieee-data/ /var/lib/
 ln -s /opt/pialert/install/index.html /var/www/html/index.html
 ln -s /opt/pialert/front /var/www/html/pialert
-chmod go+x /opt/pialert /opt/pialert/back/shoutrrr/arm64/shoutrrr
+chmod go+x /opt/pialert /opt/pialert/back/shoutrrr/x86/shoutrrr
 chgrp -R www-data /opt/pialert/db /opt/pialert/front/reports /opt/pialert/config /opt/pialert/config/pialert.conf
 chmod -R 775 /opt/pialert/db /opt/pialert/db/temp /opt/pialert/config /opt/pialert/front/reports
 touch /opt/pialert/log/pialert.vendors.log /opt/pialert/log/pialert.IP.log /opt/pialert/log/pialert.1.log /opt/pialert/log/pialert.cleanup.log /opt/pialert/log/pialert.webservices.log
@@ -82,8 +79,6 @@ done
 sed -i 's#PIALERT_PATH\s*=\s*'\''/home/pi/pialert'\''#PIALERT_PATH           = '\''/opt/pialert'\''#' /opt/pialert/config/pialert.conf
 sed -i 's/$HOME/\/opt/g' /opt/pialert/install/pialert.cron
 crontab /opt/pialert/install/pialert.cron
-echo "bash -c \"\$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)\" -s --lxc" >/usr/bin/update
-chmod +x /usr/bin/update
 echo "python3 /opt/pialert/back/pialert.py 1" >/usr/bin/scan
 chmod +x /usr/bin/scan
 echo "/opt/pialert/back/pialert-cli set_permissions --lxc" >/usr/bin/permissions

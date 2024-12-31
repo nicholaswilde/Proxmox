@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,15 +17,13 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing go2rtc"
 mkdir -p /opt/go2rtc
 cd /opt/go2rtc
-wget -q https://github.com/AlexxIT/go2rtc/releases/latest/download/go2rtc_linux_arm64
-chmod +x go2rtc_linux_arm64
+wget -q https://github.com/AlexxIT/go2rtc/releases/latest/download/go2rtc_linux_amd64
+chmod +x go2rtc_linux_amd64
 msg_ok "Installed go2rtc"
 
 msg_info "Creating Service"
@@ -37,7 +35,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/opt/go2rtc/go2rtc_linux_arm64
+ExecStart=/opt/go2rtc/go2rtc_linux_amd64
 
 [Install]
 WantedBy=multi-user.target" >$service_path

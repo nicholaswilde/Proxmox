@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/msgbyte/tianji
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -28,9 +28,7 @@ $STD apt-get install -y \
   make \
   gnupg \
   ca-certificates \
-  mc \
-  wget \
-  openssh-server
+  mc
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Node.js"

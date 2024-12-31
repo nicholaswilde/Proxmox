@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,15 +19,14 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y chromium
 $STD apt-get install -y xvfb
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 if [[ "$CTTYPE" == "0" ]]; then
   msg_info "Setting Up Hardware Acceleration"
   $STD apt-get -y install \
     va-driver-all \
-    ocl-icd-libopencl1
+    ocl-icd-libopencl1 \
+    intel-opencl-icd
   chgrp video /dev/dri
   chmod 755 /dev/dri
   chmod 660 /dev/dri/*

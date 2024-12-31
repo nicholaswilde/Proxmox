@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/ellite/wallos
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -59,6 +59,7 @@ $STD curl http://localhost/endpoints/db/migrate.php
 msg_ok "Installed Wallos"
 
 msg_info "Setting up Crontabs" 
+mkdir -p /var/log/cron
 cat <<EOF > /opt/wallos.cron
 0 1 * * * php /opt/wallos/endpoints/cronjobs/updatenextpayment.php >> /var/log/cron/updatenextpayment.log 2>&1
 0 2 * * * php /opt/wallos/endpoints/cronjobs/updateexchange.php >> /var/log/cron/updateexchange.log 2>&1

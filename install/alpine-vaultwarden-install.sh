@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 
 color
@@ -21,12 +21,13 @@ $STD apk add openssh
 $STD apk add nano
 $STD apk add mc
 $STD apk add argon2
-$STD apk add openssh
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Alpine-Vaultwarden"
 $STD apk add vaultwarden
-sed -i -e 's/# export ADMIN_TOKEN=.*/export ADMIN_TOKEN='\'''\''/' -e '/^# export ROCKET_ADDRESS=0\.0\.0\.0/s/^# //' -e 's|export WEB_VAULT_ENABLED=.*|export WEB_VAULT_ENABLED=true|' /etc/conf.d/vaultwarden
+sed -i -e 's|export WEB_VAULT_ENABLED=.*|export WEB_VAULT_ENABLED=true|' /etc/conf.d/vaultwarden
+echo -e "export ADMIN_TOKEN=''" >>/etc/conf.d/vaultwarden
+echo -e "export ROCKET_ADDRESS=0.0.0.0" >>/etc/conf.d/vaultwarden
 msg_ok "Installed Alpine-Vaultwarden"
 
 msg_info "Installing Web-Vault"

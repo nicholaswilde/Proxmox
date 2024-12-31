@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,8 +18,6 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gnupg
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL Repository"
@@ -37,7 +35,7 @@ cat <<EOF >/etc/postgresql/17/main/pg_hba.conf
 local   all             postgres                                peer
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 # "local" is for Unix domain socket connections only
-local   all             all                                     peer
+local   all             all                                     md5
 # IPv4 local connections:
 host    all             all             127.0.0.1/32            scram-sha-256
 host    all             all             0.0.0.0/24              md5

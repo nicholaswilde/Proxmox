@@ -4,7 +4,7 @@
 # Author: tteck (tteckster)
 #         Jon Spriggs (jontheniceguy)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Based on work from https://i12bretro.github.io/tutorials/0405.html
 
 function header_info {
@@ -164,6 +164,15 @@ function pve_check() {
     sleep 2
     exit
 fi
+}
+
+function arch_check() {
+  if [ "$(dpkg --print-architecture)" != "amd64" ]; then
+    echo -e "\n ${CROSS} This script will not work with PiMox! \n"
+    echo -e "Exiting..."
+    sleep 2
+    exit
+  fi
 }
 
 function ssh_check() {
@@ -386,6 +395,7 @@ function start_script() {
   fi
 }
 
+arch_check
 pve_check
 ssh_check
 start_script
@@ -423,15 +433,7 @@ msg_info "Getting URL for OpenWrt Disk Image"
 
 response=$(curl -s https://openwrt.org)
 stableversion=$(echo "$response" | sed -n 's/.*Current stable release - OpenWrt \([0-9.]\+\).*/\1/p')
-arch=$(uname -m)
-if [[ "$arch" == "aarch64" ]]; then
-    URL="https://downloads.openwrt.org/releases/$stableversion/targets/armsr/armv8/openwrt-$stableversion-armsr-armv8-generic-ext4-combined.img.gz"
-elif [[ "$arch" == "armv7l" || "$arch" == "armv7" ]]; then
-    URL="https://downloads.openwrt.org/releases/$stableversion/targets/armsr/armv7/openwrt-$stableversion-armsr-armv7-generic-ext4-combined.img.gz"
-else
-    echo "System architecture is unsupported ($arch), create a discussion on GitHub for assistance."
-    exit
-fi
+URL="https://downloads.openwrt.org/releases/$stableversion/targets/x86/64/openwrt-$stableversion-x86-64-generic-ext4-combined.img.gz"
 
 sleep 2
 msg_ok "${CL}${BL}${URL}${CL}"
@@ -467,14 +469,14 @@ done
 msg_info "Creating OpenWrt VM"
 qm create $VMID -cores $CORE_COUNT -memory $RAM_SIZE -name $HN \
   -onboot 1 -ostype l26 -scsihw virtio-scsi-pci --tablet 0
-pvesm alloc $STORAGE $VMID $DISK0 64M 1>&/dev/null
+pvesm alloc $STORAGE $VMID $DISK0 4M 1>&/dev/null
 qm importdisk $VMID ${FILE%.*} $STORAGE ${DISK_IMPORT:-} 1>&/dev/null
 qm set $VMID \
-  -efidisk0 ${DISK0_REF},efitype=4m,size=64M \
+  -efidisk0 ${DISK0_REF},efitype=4m,size=4M \
   -scsi0 ${DISK1_REF},size=512M \
   -boot order=scsi0 \
   -tags proxmox-helper-scripts \
-  -description "<div align='center'><a href='https://pimox-scripts.com'><img src='https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/images/logo-81x112.png'/></a>
+  -description "<div align='center'><a href='https://Helper-Scripts.com'><img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png'/></a>
 
   # OpenWRT
 
@@ -500,7 +502,6 @@ send_line_to_vm "uci set firewall.@zone[1].input='ACCEPT'"
 send_line_to_vm "uci set firewall.@zone[1].forward='ACCEPT'"
 send_line_to_vm "uci commit"
 send_line_to_vm "halt"
-qm stop $VMID
 msg_ok "Network interfaces have been successfully configured."
 until qm status $VMID | grep -q "stopped"; do
   sleep 2

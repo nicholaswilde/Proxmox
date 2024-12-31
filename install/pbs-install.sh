@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,19 +17,15 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y git
-$STD apt-get install -y wget
-$STD apt-get install -y dpkg-dev
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Proxmox Backup Server"
+wget -q https://enterprise.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg
+cat <<EOF >>/etc/apt/sources.list
+deb http://download.proxmox.com/debian/pbs bookworm pbs-no-subscription
+EOF
 $STD apt-get update
-export DEBIAN_FRONTEND=noninteractive
-git clone https://github.com/wofferl/proxmox-backup-arm64
-cd ./proxmox-backup-arm64
-./build.sh download
-apt install -y -f ./packages/*
+$STD apt-get install -y proxmox-backup-server
 msg_ok "Installed Proxmox Backup Server"
 
 motd_ssh

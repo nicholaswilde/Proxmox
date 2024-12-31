@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MountyMapleSyrup (MountyMapleSyrup)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,14 +19,11 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y git
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3 Dependencies"
 $STD apt-get install -y pip
 $STD apt-get install -y python3-irc
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip install jaraco.stream
 $STD pip install python-Levenshtein
 $STD pip install soupsieve

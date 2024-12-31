@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -25,9 +25,7 @@ $STD apt-get install -y \
   libsasl2-dev \
   procps \
   dnsutils \
-  ripgrep \
-  wget \
-  openssh-server
+  ripgrep
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
@@ -36,7 +34,6 @@ $STD apt-get install -y \
   python3-ldap \
   python3-msgpack \
   python3-regex
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
 
 msg_info "Setting up Node.js Repository"

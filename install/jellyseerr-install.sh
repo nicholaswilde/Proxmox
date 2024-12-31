@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,9 +18,7 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y git
-$STD apt-get install -y ca-certificates
 $STD apt-get install -y gpg
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

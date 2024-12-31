@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -29,9 +29,7 @@ $STD apt-get install -y --no-install-recommends \
   sudo \
   git \
   make \
-  mc \
-  wget \
-  openssh-server
+  mc
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"

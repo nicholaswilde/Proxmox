@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
   clear
@@ -99,6 +99,15 @@ function pve_check() {
     sleep 2
     exit
 fi
+}
+
+function arch_check() {
+  if [ "$(dpkg --print-architecture)" != "amd64" ]; then
+    msg_error "This script will not work with PiMox! \n"
+    echo -e "Exiting..."
+    sleep 2
+    exit
+  fi
 }
 
 function ssh_check() {
@@ -327,6 +336,7 @@ function start_script() {
 }
 
 check_root
+arch_check
 pve_check
 ssh_check
 start_script
@@ -360,7 +370,7 @@ fi
 msg_ok "Using ${CL}${BL}$STORAGE${CL} ${GN}for Storage Location."
 msg_ok "Virtual Machine ID is ${CL}${BL}$VMID${CL}."
 msg_info "Retrieving the URL for the Debian 12 Qcow2 Disk Image"
-URL=https://cloud.debian.org/images/cloud/bookworm/20240507-1740/debian-12-nocloud-arm64-20240507-1740.qcow2
+URL=https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-nocloud-amd64.qcow2
 sleep 2
 msg_ok "${CL}${BL}${URL}${CL}"
 wget -q --show-progress $URL
@@ -391,21 +401,47 @@ for i in {0,1}; do
 done
 
 msg_info "Creating a Debian 12 VM"
-qm create $VMID -agent 1${MACHINE} -tablet 0 -localtime 1 -bios ovmf -cores $CORE_COUNT -memory $RAM_SIZE \
+qm create $VMID -agent 1${MACHINE} -tablet 0 -localtime 1 -bios ovmf${CPU_TYPE} -cores $CORE_COUNT -memory $RAM_SIZE \
   -name $HN -tags proxmox-helper-scripts -net0 virtio,bridge=$BRG,macaddr=$MAC$VLAN$MTU -onboot 1 -ostype l26 -scsihw virtio-scsi-pci
-pvesm alloc $STORAGE $VMID $DISK0 64M 1>&/dev/null
+pvesm alloc $STORAGE $VMID $DISK0 4M 1>&/dev/null
 qm importdisk $VMID ${FILE} $STORAGE ${DISK_IMPORT:-} 1>&/dev/null
 qm set $VMID \
-  -efidisk0 ${DISK0_REF},efitype=4m,size=64M \
+  -efidisk0 ${DISK0_REF}${FORMAT} \
   -scsi0 ${DISK1_REF},${DISK_CACHE}${THIN}size=2G \
   -boot order=scsi0 \
-  -serial0 socket \
-  -description "<div align='center'><a href='https://pimox-scripts.com'><img src='https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/images/logo-81x112.png'/></a>
+  -serial0 socket >/dev/null
+qm resize $VMID scsi0 4G >/dev/null
+  DESCRIPTION=$(cat <<EOF
+<div align='center'>
+  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>
+    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
+  </a>
 
-  # Debian 12 VM
+  <h2 style='font-size: 24px; margin: 20px 0;'>Debian VM</h2>
 
-  <a href='https://ko-fi.com/proxmoxhelperscripts'><img src='https://img.shields.io/badge/&#x2615;-Buy me a coffee-blue' /></a>
-  </div>" >/dev/null
+  <p style='margin: 16px 0;'>
+    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>
+      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />
+    </a>
+  </p>
+  
+  <span style='margin: 0 10px;'>
+    <i class="fa fa-github fa-fw" style="color: #f5f5f5;"></i>
+    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
+  </span>
+  <span style='margin: 0 10px;'>
+    <i class="fa fa-comments fa-fw" style="color: #f5f5f5;"></i>
+    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
+  </span>
+  <span style='margin: 0 10px;'>
+    <i class="fa fa-exclamation-circle fa-fw" style="color: #f5f5f5;"></i>
+    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
+  </span>
+</div>
+EOF
+)
+  qm set "$VMID" -description "$DESCRIPTION" >/dev/null  
+  
 msg_ok "Created a Debian 12 VM ${CL}${BL}(${HN})"
 if [ "$START_VM" == "yes" ]; then
   msg_info "Starting Debian 12 VM"
@@ -413,4 +449,4 @@ if [ "$START_VM" == "yes" ]; then
   msg_ok "Started Debian 12 VM"
 fi
 msg_ok "Completed Successfully!\n"
-echo "More Info at https://github.com/tteck/Proxmox/discussions/1988"
+echo "More Info at https://github.com/community-scripts/ProxmoxVE/discussions/836"

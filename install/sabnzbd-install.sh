@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,8 +19,6 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y par2
 $STD apt-get install -y p7zip-full
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 cat <<EOF >/etc/apt/sources.list.d/non-free.list
 deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
 EOF
@@ -33,7 +31,6 @@ msg_info "Updating Python3"
 $STD apt-get install -y \
   python3-dev \
   python3-pip
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD apt-get install -y python3-setuptools
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Updated Python3"

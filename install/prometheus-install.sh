@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,17 +17,15 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Prometheus"
 RELEASE=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
 mkdir -p /etc/prometheus
 mkdir -p /var/lib/prometheus
-wget -q https://github.com/prometheus/prometheus/releases/download/v${RELEASE}/prometheus-${RELEASE}.linux-arm64.tar.gz
-tar -xf prometheus-${RELEASE}.linux-arm64.tar.gz
-cd prometheus-${RELEASE}.linux-arm64
+wget -q https://github.com/prometheus/prometheus/releases/download/v${RELEASE}/prometheus-${RELEASE}.linux-amd64.tar.gz
+tar -xf prometheus-${RELEASE}.linux-amd64.tar.gz
+cd prometheus-${RELEASE}.linux-amd64
 mv prometheus promtool /usr/local/bin/
 mv prometheus.yml /etc/prometheus/prometheus.yml
 echo "${RELEASE}" >/opt/${APPLICATION}_version.txt
@@ -60,5 +58,5 @@ customize
 msg_info "Cleaning up"
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
-rm -rf ../prometheus-${RELEASE}.linux-arm64 ../prometheus-${RELEASE}.linux-arm64.tar.gz
+rm -rf ../prometheus-${RELEASE}.linux-amd64 ../prometheus-${RELEASE}.linux-amd64.tar.gz
 msg_ok "Cleaned"

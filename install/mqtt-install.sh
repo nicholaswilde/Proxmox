@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,11 +18,14 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Mosquitto MQTT Broker"
+source /etc/os-release
+curl -fsSL http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key >/usr/share/keyrings/mosquitto-repo.gpg.key
+chmod go+r /usr/share/keyrings/mosquitto-repo.gpg.key
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/mosquitto-repo.gpg.key] http://repo.mosquitto.org/debian ${VERSION_CODENAME} main" >/etc/apt/sources.list.d/mosquitto.list
+$STD apt-get update
 $STD apt-get -y install mosquitto
 $STD apt-get -y install mosquitto-clients
 cat <<EOF >/etc/mosquitto/conf.d/default.conf

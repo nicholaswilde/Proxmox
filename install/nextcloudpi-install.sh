@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,22 +17,10 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing NextCloudPi (Patience)"
-$STD apt-get install -y systemd-resolved
-systemctl enable -q --now systemd-resolved
-cat <<'EOF' >/etc/systemd/resolved.conf
-[Resolve]
-DNS=8.8.8.8
-FallbackDNS=8.8.4.4
-EOF
-systemctl restart systemd-resolved
 $STD bash <(curl -fsSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh)
-systemctl disable -q --now systemd-resolved
-$STD apt-get remove -y systemd-resolved
 msg_ok "Installed NextCloudPi"
 
 motd_ssh
