@@ -22,7 +22,7 @@ $STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Autobrr"
-wget -q $(curl -s https://api.github.com/repos/autobrr/autobrr/releases/latest | grep download | grep linux_x86_64 | cut -d\" -f4)
+wget -q $(curl -s https://api.github.com/repos/autobrr/autobrr/releases/latest | grep download | grep linux_arm64 | cut -d\" -f4)
 tar -C /usr/local/bin -xzf autobrr*.tar.gz
 rm -rf autobrr*.tar.gz
 mkdir -p /root/.config/autobrr

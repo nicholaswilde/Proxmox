@@ -29,11 +29,11 @@ msg_ok "Installed Dependencies"
 
 msg_info "Installing AgentDVR"
 mkdir -p /opt/agentdvr/agent
-RELEASE=$(curl -s "https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=Linux64&fromVersion=0" | grep -o 'https://.*\.zip')
+RELEASE=$(curl -s "https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=LinuxARM64&fromVersion=0" | grep -o 'https://.*\.zip')
 cd /opt/agentdvr/agent
 wget -q $RELEASE
-$STD unzip Agent_Linux64*.zip
-rm -rf Agent_Linux64*.zip
+$STD unzip Agent_LinuxARM64*.zip
+rm -rf Agent_LinuxARM64*.zip
 chmod +x ./Agent
 msg_ok "Installed AgentDVR"
 

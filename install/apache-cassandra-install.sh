@@ -21,6 +21,7 @@ $STD apt-get install -y apt-transport-https
 $STD apt-get install -y gpg
 $STD apt-get install -y openssh-server
 $STD apt-get install -y wget
+$STD apk add openssh
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Eclipse Temurin (Patience)"

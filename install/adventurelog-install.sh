@@ -44,15 +44,11 @@ msg_ok "Set up PostgreSQL Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 $STD npm install -g pnpm
 msg_ok "Installed Node.js"
 
 msg_info "Install/Set up PostgreSQL Database"
 $STD apt-get install -y postgresql-16 postgresql-16-postgis
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 DB_NAME="adventurelog_db"
 DB_USER="adventurelog_user"
 DB_PASS="$(openssl rand -base64 18 | tr -dc 'a-zA-Z0-9' | cut -c1-13)"
