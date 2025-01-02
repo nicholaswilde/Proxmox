@@ -17,10 +17,14 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing MariaDB"
 $STD apt-get install -y mariadb-server
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 sed -i 's/^# *\(port *=.*\)/\1/' /etc/mysql/my.cnf
 sed -i 's/^bind-address/#bind-address/g' /etc/mysql/mariadb.conf.d/50-server.cnf
 msg_ok "Installed MariaDB"
@@ -29,14 +33,16 @@ read -r -p "Would you like to add PhpMyAdmin? <y/N> " prompt
 if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   msg_info "Installing phpMyAdmin"
   $STD apt-get install -y \
-    apache2 \
-    php \
-    php-mysqli \
-    php-mbstring \
-    php-zip \
-    php-gd \
-    php-json \
-    php-curl 
+  apache2 \
+  php \
+  php-mysqli \
+  php-mbstring \
+  php-zip \
+  php-gd \
+  php-json \
+  php-curl \
+  openssh-server \
+  wget
 	
 	wget -q "https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.tar.gz"
 	mkdir -p /var/www/html/phpMyAdmin

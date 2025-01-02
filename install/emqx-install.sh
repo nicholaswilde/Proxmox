@@ -17,11 +17,15 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing EMQX"
 $STD bash <(curl -fsSL https://packagecloud.io/install/repositories/emqx/emqx/script.deb.sh)
 $STD apt-get install -y emqx
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD systemctl enable --now emqx
 msg_ok "Installed EMQX"
 

@@ -19,6 +19,8 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y avahi-daemon
 $STD apt-get install -y gnupg2
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Homebridge Repository"
@@ -29,6 +31,8 @@ msg_ok "Set up Homebridge Repository"
 msg_info "Installing Homebridge"
 $STD apt update
 $STD apt-get install -y homebridge
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Homebridge"
 
 motd_ssh

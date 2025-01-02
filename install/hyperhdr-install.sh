@@ -18,6 +18,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing HyperHDR"
@@ -26,6 +28,8 @@ chmod go+r /usr/share/keyrings/hyperhdr.public.apt.gpg.key
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hyperhdr.public.apt.gpg.key] https://awawa-dev.github.io $(awk -F= '/VERSION_CODENAME/ {print $2}' /etc/os-release) main" >/etc/apt/sources.list.d/hyperhdr.list
 $STD apt-get update
 $STD apt-get install -y hyperhdr
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed HyperHDR"
 
 msg_info "Creating Service"

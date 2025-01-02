@@ -22,6 +22,8 @@ $STD apt-get install -y g++
 $STD apt-get install -y gcc
 $STD apt-get install -y ca-certificates
 $STD apt-get install -y gnupg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -33,6 +35,8 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD npm install -g npm@latest
 $STD npm install -g yarn
 msg_ok "Installed Node.js"

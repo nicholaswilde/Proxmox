@@ -18,7 +18,9 @@ $STD apt-get install -y \
   curl \
   mc \
   sudo \
-  openjdk-17-jre
+  openjdk-17-jre \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Komga"

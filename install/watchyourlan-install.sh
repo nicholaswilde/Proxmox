@@ -15,6 +15,8 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y {curl,sudo,mc,gpg,arp-scan,ieee-data,libwww-perl}
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing WatchYourLAN"

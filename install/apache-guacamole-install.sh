@@ -14,30 +14,32 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-   build-essential \
-   curl \
-   jq \
-   libcairo2-dev \
-   libturbojpeg0 \
-   libpng-dev \
-   libtool-bin \
-   libossp-uuid-dev \
-   libvncserver-dev \
-   freerdp2-dev \
-   libssh2-1-dev \
-   libtelnet-dev \
-   libwebsockets-dev \
-   libpulse-dev \
-   libvorbis-dev \
-   libwebp-dev \
-   libssl-dev \
-   libpango1.0-dev \
-   libswscale-dev \
-   libavcodec-dev \
-   libavutil-dev \
-   libavformat-dev \
-   mariadb-server \
-   default-jdk
+  build-essential \
+  curl \
+  jq \
+  libcairo2-dev \
+  libturbojpeg0 \
+  libpng-dev \
+  libtool-bin \
+  libossp-uuid-dev \
+  libvncserver-dev \
+  freerdp2-dev \
+  libssh2-1-dev \
+  libtelnet-dev \
+  libwebsockets-dev \
+  libpulse-dev \
+  libvorbis-dev \
+  libwebp-dev \
+  libssl-dev \
+  libpango1.0-dev \
+  libswscale-dev \
+  libavcodec-dev \
+  libavutil-dev \
+  libavformat-dev \
+  mariadb-server \
+  default-jdk \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setup Apache Tomcat"

@@ -25,7 +25,9 @@ $STD apt-get install -y \
   libsasl2-dev \
   procps \
   dnsutils \
-  ripgrep
+  ripgrep \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
@@ -33,7 +35,9 @@ $STD apt-get install -y \
   python3-pip \
   python3-ldap \
   python3-msgpack \
-  python3-regex
+  python3-regex \
+  openssh-server \
+  wget
 msg_ok "Installed Python Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -45,6 +49,8 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing Playright/Chromium"

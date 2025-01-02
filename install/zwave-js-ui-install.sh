@@ -17,7 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
   sudo \
-  mc 
+  mc \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Z-Wave JS UI"

@@ -22,7 +22,9 @@ $STD apt-get install -y \
   mc \
   php8.2-{curl,mbstring,mysql,xml,zip,gd} \
   sudo \
-  unzip
+  unzip \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Database"

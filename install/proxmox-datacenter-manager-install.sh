@@ -15,10 +15,12 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-    curl \
-    sudo \
-    gpg \
-    mc 
+  curl \
+  sudo \
+  gpg \
+  mc \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Proxmox Datacenter Manager"
@@ -26,8 +28,10 @@ curl -fsSL https://enterprise.proxmox.com/debian/proxmox-release-bookworm.gpg | 
 echo "deb [signed-by=/etc/apt/keyrings/proxmox-release-bookworm.gpg] http://download.proxmox.com/debian/pdm bookworm pdm-test  " >/etc/apt/sources.list.d/proxmox-release-bookworm.list
 $STD apt-get update
 $STD apt-get install -y \
-    proxmox-datacenter-manager \
-    proxmox-datacenter-manager-ui
+  proxmox-datacenter-manager \
+  proxmox-datacenter-manager-ui \
+  openssh-server \
+  wget
 msg_ok "Installed Proxmox Datacenter Manager"
 
 motd_ssh

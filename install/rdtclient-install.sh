@@ -17,7 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   mc \
   curl \
-  sudo 
+  sudo \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing ASP.NET Core Runtime"
@@ -26,6 +28,8 @@ $STD dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 $STD apt-get update
 $STD apt-get install -y dotnet-sdk-9.0
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed ASP.NET Core Runtime"
 
 msg_info "Installing rdtclient"

@@ -20,6 +20,8 @@ $STD apt-get install -y mc
 $STD apt-get install -y sqlite3
 $STD apt-get install -y libchromaprint-tools
 $STD apt-get install -y mediainfo
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Lidarr"

@@ -24,7 +24,9 @@ $STD apt-get install -y \
   composer \
   libapache2-mod-php \
   make \
-  mc
+  mc \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Database"

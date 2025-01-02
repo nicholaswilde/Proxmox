@@ -19,15 +19,21 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  jq
+  jq \
+  openssh-server \
+  wget
 echo "deb http://deb.debian.org/debian bookworm non-free non-free-firmware" > /etc/apt/sources.list.d/non-free.list
 $STD apt-get update
 $STD apt-get install -y unrar
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 rm /etc/apt/sources.list.d/non-free.list
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"
 $STD apt-get install -y python3-pip
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip install -U --no-cache-dir pip
 msg_ok "Updated Python3"

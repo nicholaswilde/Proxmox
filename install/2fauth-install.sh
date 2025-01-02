@@ -23,7 +23,9 @@ $STD apt-get install -y \
   nginx \
   composer \
   php8.2-{bcmath,common,ctype,curl,fileinfo,fpm,gd,mbstring,mysql,xml,cli} \
-  mariadb-server
+  mariadb-server \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 # Template: MySQL Database

@@ -15,12 +15,14 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-    curl \
-    sudo \
-    wget \
-    mc \
-    zip \
-    jq
+  curl \
+  sudo \
+  wget \
+  mc \
+  zip \
+  jq \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 

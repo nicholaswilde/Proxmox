@@ -18,6 +18,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gnupg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL Repository"
@@ -29,6 +31,8 @@ msg_ok "Setup PostgreSQL Repository"
 msg_info "Installing PostgreSQL"
 $STD apt-get update
 $STD apt-get install -y postgresql
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 
 cat <<EOF >/etc/postgresql/17/main/pg_hba.conf
 # PostgreSQL Client Authentication Configuration File

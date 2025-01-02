@@ -14,10 +14,12 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-    curl \
-    mc \
-    sudo \
-    openjdk-17-jre
+  curl \
+  mc \
+  sudo \
+  openjdk-17-jre \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setup Jenkins"
@@ -25,6 +27,8 @@ wget -qO /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/j
 echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" https://pkg.jenkins.io/debian binary/ >/etc/apt/sources.list.d/jenkins.list
 $STD apt-get update
 $STD apt-get install -y jenkins
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Setup Jenkins"
 
 motd_ssh

@@ -18,7 +18,9 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  postgresql
+  postgresql \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL"

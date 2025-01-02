@@ -19,6 +19,8 @@ $STD apt-get install -y make zip net-tools
 $STD apt-get install -y gcc g++ cmake
 $STD apt-get install -y ca-certificates
 $STD apt-get install -y gnupg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -30,10 +32,14 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing FFMPEG"
 $STD apt-get install -y ffmpeg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed FFMPEG"
 
 msg_info "Cloning Shinobi"
@@ -53,6 +59,8 @@ sqlpass="root"
 echo "mariadb-server mariadb-server/root_password password $sqlpass" | debconf-set-selections
 echo "mariadb-server mariadb-server/root_password_again password $sqlpass" | debconf-set-selections
 $STD apt-get install -y mariadb-server
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 service mysql start
 mysql -u "$sqluser" -p"$sqlpass" -e "source sql/user.sql" || true
 msg_ok "Installed Database"

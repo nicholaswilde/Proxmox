@@ -17,10 +17,14 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing SmokePing"
 $STD apt-get install -y smokeping
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 cat <<EOF >/etc/smokeping/config.d/Targets
 *** Targets ***
 probe = FPing

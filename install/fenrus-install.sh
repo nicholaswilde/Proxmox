@@ -22,6 +22,8 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y curl
 $STD apt-get install -y git
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing ASP.NET Core 7 SDK"
@@ -34,6 +36,8 @@ if [ "${var_os}" = "debian" ]; then
 fi
 $STD apt-get update
 $STD apt-get install -y dotnet-sdk-7.0
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed ASP.NET Core 7 SDK"
 
 msg_info "Installing ${APPLICATION}"

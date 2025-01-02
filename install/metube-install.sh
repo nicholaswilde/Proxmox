@@ -38,7 +38,9 @@ $STD apt-get install -y \
   python3 \
   python3-dev \
   python3-pip \
-  python3-venv
+  python3-venv \
+  openssh-server \
+  wget
 msg_ok "Installed Python3"
 
 msg_info "Setting up Node.js Repository"
@@ -50,6 +52,8 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing MeTube"

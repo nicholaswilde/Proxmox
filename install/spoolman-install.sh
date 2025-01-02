@@ -24,7 +24,9 @@ $STD apt-get install -y \
   libpq-dev \
   gpg \
   ca-certificates \
-  mc
+  mc \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3"
@@ -32,7 +34,9 @@ $STD apt-get install -y \
   python3-dev \
   python3-setuptools \
   python3-wheel \
-  python3-pip
+  python3-pip \
+  openssh-server \
+  wget
 msg_ok "Installed Python3"
 
 msg_info "Installing Spoolman"

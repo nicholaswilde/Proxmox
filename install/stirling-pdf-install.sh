@@ -29,20 +29,26 @@ $STD apt-get install -y \
   g++ \
   unpaper \
   qpdf \
-  poppler-utils
+  poppler-utils \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing LibreOffice Components"
 $STD apt-get install -y \
   libreoffice-writer \
   libreoffice-calc \
-  libreoffice-impress
+  libreoffice-impress \
+  openssh-server \
+  wget
 msg_ok "Installed LibreOffice Components"
 
 msg_info "Installing Python Dependencies"
 $STD apt-get install -y \
   python3 \
-  python3-pip
+  python3-pip \
+  openssh-server \
+  wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip3 install \
   uno \
@@ -71,6 +77,8 @@ msg_ok "Installed JBIG2"
 
 msg_info "Installing Language Packs (Patience)"
 $STD apt-get install -y 'tesseract-ocr-*'
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Language Packs"
 
 msg_info "Installing Stirling-PDF (Additional Patience)"

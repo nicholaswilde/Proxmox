@@ -19,6 +19,8 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
 $STD apt-get install -y apt-transport-https
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 RELEASE=$(curl -s https://api.github.com/repos/traefik/traefik/releases | grep -oP '"tag_name":\s*"v\K[\d.]+?(?=")' | sort -V | tail -n 1)

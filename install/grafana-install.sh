@@ -20,6 +20,8 @@ $STD apt-get install -y mc
 $STD apt-get install -y gnupg
 $STD apt-get install -y apt-transport-https
 $STD apt-get install -y software-properties-common
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Grafana Repository"
@@ -30,6 +32,8 @@ msg_ok "Set up Grafana Repository"
 msg_info "Installing Grafana"
 $STD apt-get update
 $STD apt-get install -y grafana
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 systemctl start grafana-server
 systemctl enable --now -q grafana-server.service
 msg_ok "Installed Grafana"

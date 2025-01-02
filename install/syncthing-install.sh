@@ -18,6 +18,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gnupg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Syncthing"
@@ -25,6 +27,8 @@ curl -sL -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.
 sh -c 'echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" > /etc/apt/sources.list.d/syncthing.list'
 $STD apt-get update
 $STD apt-get install -y syncthing
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD systemctl enable syncthing@root.service
 systemctl start syncthing@root.service
 sleep 5

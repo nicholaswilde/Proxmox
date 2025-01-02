@@ -37,7 +37,9 @@ $STD apt-get install -y \
   python3 \
   python3-dev \
   python3-setuptools \
-  python3-pip
+  python3-pip \
+  openssh-server \
+  wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Updated Python3"
 
@@ -50,6 +52,8 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD npm install -g yarn
 msg_ok "Installed Node.js"
 
@@ -80,6 +84,8 @@ curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|gpg --dearmor -o /
 echo "deb https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" >/etc/apt/sources.list.d/pgdg.list
 $STD apt-get update
 $STD apt-get install -y postgresql-16
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD sudo -u postgres psql -c "CREATE ROLE $DB_USER WITH LOGIN PASSWORD '$DB_PASS';"
 $STD sudo -u postgres psql -c "CREATE DATABASE $DB_NAME WITH OWNER $DB_USER TEMPLATE template0;"
 $STD sudo -u postgres psql -c "ALTER ROLE $DB_USER SET client_encoding TO 'utf8';"
