@@ -38,6 +38,7 @@ $STD apt-get install -y \
   git \
   openssh-server \
   wget
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Dependencies"
 
 msg_info "Installing yq"
@@ -69,6 +70,7 @@ $STD ./configure --enable-optimizations
 $STD make altinstall
 cd ~
 $STD update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.12 1
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Setup Python 3"
 
 msg_info "Setting up Node.js Repository"

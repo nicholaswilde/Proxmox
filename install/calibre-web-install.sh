@@ -31,8 +31,8 @@ msg_ok "Installed Python Dependencies"
 msg_info "Installing Kepubify"
 mkdir -p /opt/kepubify
 cd /opt/kepubify
-curl -fsSLO https://github.com/pgaskin/kepubify/releases/latest/download/kepubify-linux-64bit &>/dev/null
-chmod +x kepubify-linux-64bit
+curl -fsSLO https://github.com/pgaskin/kepubify/releases/latest/download/kepubify-linux-arm64 &>/dev/null
+chmod +x kepubify-linux-arm64
 msg_ok "Installed Kepubify"
 
 msg_info "Installing Calibre-Web"
