@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
@@ -16,11 +16,15 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y curl
-$STD apt-get install -y sudo
-$STD apt-get install -y mc
-$STD apt-get install -y ca-certificates
-$STD apt-get install -y gnupg
+$STD apt-get install -y \
+  sudo \
+  mc \
+  curl \
+  ca-certificates \
+  gnupg \
+  make \
+  g++ \
+  build-essential
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Copyright (c) 2021-2024 community-scripts ORG
+#Copyright (c) 2021-2025 community-scripts ORG
 # Author: Michel Roegl-Brunner (michelroegl-brunner) | MickLesk (CanbiZ)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -126,7 +126,21 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl -q enable --now tomcat guacd mysql
+cat <<EOF >/etc/systemd/system/guacd.service
+[Unit]
+Description=Guacamole Proxy Daemon (guacd)
+After=mysql.service tomcat.service
+Requires=mysql.service tomcat.service
+[Service]
+Type=forking
+ExecStart=/etc/init.d/guacd start
+ExecStop=/etc/init.d/guacd stop
+ExecReload=/etc/init.d/guacd restart
+PIDFile=/var/run/guacd.pid
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl -q enable --now mysql tomcat guacd
 msg_ok "Setup Service"
 
 motd_ssh

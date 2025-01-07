@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: MickLesk (Canbiz)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://www.usememos.com/
@@ -34,6 +34,7 @@ function update_script() {
   fi
   msg_info "Updating $APP (Patience)"
   cd /opt/memos
+  git reset --hard HEAD
   output=$(git pull --no-rebase)
   if echo "$output" | grep -q "Already up to date."; then
     msg_ok "$APP is already up to date."

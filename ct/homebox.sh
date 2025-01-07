@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck | Co-Author: MickLesk (Canbiz)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://homebox.software/en/
@@ -40,8 +40,10 @@ function update_script() {
     msg_info "Updating ${APP} to ${RELEASE}"
     cd /opt
     rm -rf homebox_bak
+    rm -rf /tmp/homebox.tar.gz
     mv homebox homebox_bak
-    wget -qO- https://github.com/sysadminsmedia/homebox/releases/download/${RELEASE}/homebox_Linux_x86_64.tar.gz | tar -xzf - -C /opt
+    wget -qO /tmp/homebox.tar.gz https://github.com/sysadminsmedia/homebox/releases/download/${RELEASE}/homebox_Linux_x86_64.tar.gz
+    tar -xzf /tmp/homebox.tar.gz -C /opt
     chmod +x /opt/homebox
     echo "${RELEASE}" >/opt/${APP}_version.txt
     msg_ok "Updated Homebox"
