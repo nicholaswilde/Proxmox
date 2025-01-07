@@ -28,7 +28,6 @@ $STD apt-get install -y \
   python3-pip \
   openssh-server \
   wget
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

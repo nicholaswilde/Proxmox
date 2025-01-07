@@ -25,7 +25,9 @@ msg_info "Updating Python3"
 $STD apt-get install -y \
   python3 \
   python3-dev \
-  python3-pip 
+  python3-pip \
+  openssh-server \
+  wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Updated Python3"
 

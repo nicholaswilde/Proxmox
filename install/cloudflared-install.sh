@@ -28,6 +28,8 @@ curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg >/usr/share/keyrings/c
 echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $VERSION main" >/etc/apt/sources.list.d/cloudflared.list
 $STD apt-get update
 $STD apt-get install -y cloudflared
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Cloudflared"
 
 read -r -p "Would you like to configure cloudflared as a DNS-over-HTTPS (DoH) proxy? <y/N> " prompt

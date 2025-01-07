@@ -36,7 +36,6 @@ $STD apt-get install -y \
   python3-ldap \
   python3-msgpack \
   python3-regex 
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
 
 msg_info "Setting up Node.js Repository"

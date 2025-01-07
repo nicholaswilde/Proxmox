@@ -5,7 +5,6 @@
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
-# ! DOES NOT SUPPORT ARM64 !
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
@@ -26,7 +25,7 @@ msg_ok "Installed Dependencies"
 
 msg_info "Install Checkmk"
 RELEASE=$(curl -fsSL https://api.github.com/repos/checkmk/checkmk/tags | grep "name" | awk '{print substr($2, 3, length($2)-4) }' | grep -v "*-rc" | tail -n +2 | head -n 1)
-wget -q https://download.checkmk.com/checkmk/v2.3.0p23/check-mk-raw-v2.3.0p23_0.bookworm_arm64.deb -O /opt/checkmk.deb
+wget -q https://download.checkmk.com/checkmk/${RELEASE}/check-mk-raw-${RELEASE}_0.bookworm_amd64.deb -O /opt/checkmk.deb
 $STD apt-get install -y /opt/checkmk.deb
 $STD apt-get install -y openssh-server
 $STD apt-get install -y wget
