@@ -37,9 +37,7 @@ $STD apt-get install -y --no-install-recommends \
   libpng-dev \
   libleptonica-dev \
   sudo \
-  mc \
-  wget \
-  openssh-server
+  mc
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3 Dependencies (Patience)"

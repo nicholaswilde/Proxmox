@@ -25,8 +25,6 @@ $STD apt-get install -y php8.2-zip
 $STD apt-get install -y php8.2-mbstring
 $STD apt-get install -y php8.2-xml
 $STD apt-get install -y git
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing TasmoAdmin"

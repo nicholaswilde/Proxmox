@@ -18,8 +18,6 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y gpg
 $STD apt-get install -y mc
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting Up Hardware Acceleration"
@@ -53,8 +51,6 @@ EOF
 # Install Jellyfin using the metapackage (which will fetch jellyfin-server, jellyfin-web, and jellyfin-ffmpeg5)
 $STD apt-get update
 $STD apt-get install -y jellyfin
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 chown -R jellyfin:adm /etc/jellyfin
 sleep 10
 systemctl restart jellyfin

@@ -35,9 +35,7 @@ $STD apt-get install -y \
   libxmlsec1-openssl \
   libmaxminddb0 \
   python3-pip \
-  git \
-  openssh-server \
-  wget
+  git
 msg_ok "Installed Dependencies"
 
 msg_info "Installing yq"
@@ -80,8 +78,6 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing Golang"
@@ -96,15 +92,11 @@ msg_ok "Installed Golang"
 
 msg_info "Installing Redis"
 $STD apt-get install -y redis-server
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 systemctl enable -q --now redis-server
 msg_ok "Installed Redis"
 
 msg_info "Installing PostgreSQL"
 $STD apt-get install -y postgresql postgresql-contrib
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 DB_NAME="authentik"
 DB_USER="authentik"
 DB_PASS="$(openssl rand -base64 18 | cut -c1-13)"

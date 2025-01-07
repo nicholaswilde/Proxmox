@@ -21,9 +21,7 @@ $STD apt-get install -y \
   sudo \
   mc \
   lsb-release \
-  gpg \
-  openssh-server \
-  wget
+  gpg 
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up evcc Repository"

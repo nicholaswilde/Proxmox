@@ -15,13 +15,11 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-  curl \
-  mc \
-  sudo \
-  default-jdk \
-  git \
-  openssh-server \
-  wget
+    curl \
+    mc \
+    sudo \
+    default-jdk \
+    git
 msg_ok "Installed Dependencies"
 
 

@@ -15,11 +15,9 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-  curl \
-  mc \
-  sudo \
-  openssh-server \
-  wget
+    curl \
+    mc \
+    sudo 
 msg_ok "Installed Dependencies"
 
 

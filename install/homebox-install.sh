@@ -19,9 +19,7 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
   sudo \
-  mc \
-  openssh-server \
-  wget
+  mc
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Homebox"

@@ -23,9 +23,7 @@ $STD apt-get install -y \
   ca-certificates \
   mc \
   unzip \
-  python3.11-venv \
-  openssh-server \
-  wget
+  python3.11-venv
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Node.js"
@@ -34,8 +32,6 @@ curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dea
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
 $STD apt-get update
 $STD apt-get install -y nodejs
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 $STD npm install -g yarn
 msg_ok "Installed Node.js"
 

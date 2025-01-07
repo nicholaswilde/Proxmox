@@ -19,8 +19,6 @@ $STD apt-get install -y gnupg
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 # Abfrage für die MongoDB-Version
@@ -36,8 +34,6 @@ wget -qO- https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | gpg
 echo "deb [signed-by=/usr/share/keyrings/mongodb-server-${MONGODB_VERSION}.gpg] http://repo.mongodb.org/apt/debian $(grep '^VERSION_CODENAME=' /etc/os-release | cut -d'=' -f2)/mongodb-org/${MONGODB_VERSION} main" >/etc/apt/sources.list.d/mongodb-org-${MONGODB_VERSION}.list
 $STD apt-get update
 $STD apt-get install -y mongodb-org
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
 systemctl enable -q --now mongod.service
 msg_ok "Installed MongoDB $MONGODB_VERSION"

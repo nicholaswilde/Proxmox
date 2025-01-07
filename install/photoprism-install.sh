@@ -27,8 +27,6 @@ $STD apt-get install -y imagemagick
 $STD apt-get install -y darktable
 $STD apt-get install -y rawtherapee
 $STD apt-get install -y libvips42
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 
 echo 'export PATH=/usr/local:$PATH' >>~/.bashrc
 export PATH=/usr/local:$PATH

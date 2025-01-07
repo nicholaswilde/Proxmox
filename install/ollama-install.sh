@@ -23,8 +23,6 @@ $STD apt-get install -y git
 $STD apt-get install -y build-essential
 $STD apt-get install -y pkg-config
 $STD apt-get install -y cmake
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Golang"
@@ -56,8 +54,6 @@ msg_ok "Set Up Hardware Acceleration"
 
 msg_info "Installing Intel® oneAPI Base Toolkit (Patience)"
 $STD apt-get install -y --no-install-recommends intel-basekit-2024.1
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Intel® oneAPI Base Toolkit"
 
 msg_info "Installing Ollama (Patience)"

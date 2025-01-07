@@ -31,9 +31,7 @@ $STD apt-get -y install \
   nmap \
   zip \
   aria2 \
-  wakeonlan \
-  wget \
-  openssh-server
+  wakeonlan
 msg_ok "Installed Dependencies"
 
 msg_info "Installing PHP Dependencies"

@@ -22,9 +22,7 @@ $STD apt-get install -y \
   mc \
   apache2 \
   libapache2-mod-php \
-  php8.2-{mbstring,gd,curl,intl,imagick,bz2,sqlite3,zip,xml} \
-  openssh-server \
-  wget
+  php8.2-{mbstring,gd,curl,intl,imagick,bz2,sqlite3,zip,xml} 
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Wallos (Patience)"

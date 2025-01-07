@@ -17,9 +17,7 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
   sudo \
-  mc \
-  openssh-server \
-  wget
+  mc
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Zabbix"
@@ -29,14 +27,10 @@ $STD dpkg -i /tmp/zabbix-release_latest+debian12_all.deb
 $STD apt-get update
 $STD apt-get install -y zabbix-server-pgsql zabbix-frontend-php php8.2-pgsql zabbix-apache-conf zabbix-sql-scripts 
 $STD apt-get install -y zabbix-agent2 zabbix-agent2-plugin-*
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Zabbix"
 
 msg_info "Setting up PostgreSQL"
 $STD apt-get install -y postgresql
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 DB_NAME=zabbixdb
 DB_USER=zabbix
 DB_PASS=$(openssl rand -base64 18 | tr -dc 'a-zA-Z0-9' | cut -c1-13)

@@ -19,8 +19,6 @@ $STD apt-get install -y mc
 $STD apt-get install -y curl
 $STD apt-get install -y ffmpeg
 $STD apt-get install -y vlc
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Threadfin"

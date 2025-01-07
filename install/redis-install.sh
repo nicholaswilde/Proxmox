@@ -20,8 +20,6 @@ $STD apt-get install -y mc
 $STD apt-get install -y apt-transport-https
 $STD apt-get install -y gpg
 $STD apt-get install -y lsb-release
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Redis"
@@ -29,8 +27,6 @@ wget -qO- https://packages.redis.io/gpg | gpg --dearmor >/usr/share/keyrings/red
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" >/etc/apt/sources.list.d/redis.list
 $STD apt-get update
 $STD apt-get install -y redis
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 sed -i 's/^bind .*/bind 0.0.0.0/' /etc/redis/redis.conf
 systemctl enable -q --now redis-server.service
 msg_ok "Installed Redis"

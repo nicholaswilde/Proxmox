@@ -15,8 +15,6 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y {debian-keyring,debian-archive-keyring,apt-transport-https,gpg,curl,sudo,mc}
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Caddy"
@@ -24,8 +22,6 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmo
 curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' >/etc/apt/sources.list.d/caddy-stable.list
 $STD apt-get update
 $STD apt-get install -y caddy
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Caddy"
 
 motd_ssh

@@ -19,8 +19,6 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y ufw
 $STD apt-get install -y ntp
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Pi-hole"
@@ -49,8 +47,6 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   read -r -p "Unbound is configured as a recursive DNS server by default, would you like it to be configured as a forwarding DNS server (using DNS-over-TLS (DoT)) instead? <y/N> " prompt
   msg_info "Installing Unbound"
   $STD apt-get install -y unbound
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
   cat <<EOF >/etc/unbound/unbound.conf.d/pi-hole.conf
 server:
   verbosity: 0

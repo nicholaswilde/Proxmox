@@ -21,8 +21,6 @@ $STD apt-get install -y lsb-release
 $STD apt-get install -y gpg
 $STD apt-get install -y apt-transport-https
 $STD apt-get install -y libpython3.11
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 
 msg_ok "Installed Dependencies"
 
@@ -31,8 +29,6 @@ wget -qO- https://releases.hyperion-project.org/hyperion.pub.key | gpg --dearmor
 echo "deb [signed-by=/usr/share/keyrings/hyperion.pub.gpg] https://apt.releases.hyperion-project.org/ $(lsb_release -cs) main" >/etc/apt/sources.list.d/hyperion.list
 $STD apt-get update
 $STD apt-get install -y hyperion
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 $STD systemctl enable --now hyperion@root.service
 msg_ok "Installed Hyperion"
 

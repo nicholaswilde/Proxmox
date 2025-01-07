@@ -19,8 +19,6 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y apt-transport-https
 $STD apt-get install -y gnupg
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Apache CouchDB"
@@ -36,8 +34,6 @@ VERSION_CODENAME="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-releas
 echo "deb [signed-by=/usr/share/keyrings/couchdb-archive-keyring.gpg] https://apache.jfrog.io/artifactory/couchdb-deb/ ${VERSION_CODENAME} main" >/etc/apt/sources.list.d/couchdb.sources.list
 $STD apt-get update
 $STD apt-get install -y couchdb
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 echo -e "CouchDB Erlang Cookie: \e[32m$ERLANG_COOKIE\e[0m" >>~/CouchDB.creds
 echo -e "CouchDB Admin Password: \e[32m$ADMIN_PASS\e[0m" >>~/CouchDB.creds
 msg_ok "Installed Apache CouchDB."

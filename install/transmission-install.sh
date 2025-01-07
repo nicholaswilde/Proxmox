@@ -17,15 +17,11 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 
 msg_info "Installing Transmission"
 $STD apt-get install -y transmission-daemon
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 systemctl stop transmission-daemon
 sed -i '{s/"rpc-whitelist-enabled": true/"rpc-whitelist-enabled": false/g; s/"rpc-host-whitelist-enabled": true,/"rpc-host-whitelist-enabled": false,/g}' /etc/transmission-daemon/settings.json
 systemctl start transmission-daemon

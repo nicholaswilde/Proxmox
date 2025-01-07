@@ -31,9 +31,7 @@ $STD apt-get install -y \
   libffi-dev \
   libpq-dev \
   libssl-dev \
-  zlib1g-dev \
-  openssh-server \
-  wget
+  zlib1g-dev
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL"

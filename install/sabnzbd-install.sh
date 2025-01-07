@@ -19,27 +19,19 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y par2
 $STD apt-get install -y p7zip-full
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 cat <<EOF >/etc/apt/sources.list.d/non-free.list
 deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
 EOF
 $STD apt-get update
 $STD apt-get install -y unrar
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 rm /etc/apt/sources.list.d/non-free.list
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"
 $STD apt-get install -y \
   python3-dev \
-  python3-pip \
-  openssh-server \
-  wget
+  python3-pip
 $STD apt-get install -y python3-setuptools
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Updated Python3"
 

@@ -19,9 +19,7 @@ $STD apt-get install -y \
   sudo \
   mc \
   gnupg \
-  jsvc \
-  openssh-server \
-  wget
+  jsvc
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Azul Zulu"

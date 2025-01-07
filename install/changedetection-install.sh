@@ -44,18 +44,14 @@ $STD apt-get install -y \
   xdg-utils \
   xvfb \
   ca-certificates \
-  gnupg \
-  openssh-server \
-  wget
+  gnupg
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"
 $STD apt-get install -y \
   python3 \
   python3-dev \
-  python3-pip \
-  openssh-server \
-  wget
+  python3-pip
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Updated Python3"
 
@@ -68,8 +64,6 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing Change Detection"
@@ -94,18 +88,14 @@ $STD apt-get install -y \
   libfontconfig1 \
   fonts-freefont-ttf \
   fonts-gfs-neohellenic \
-  fonts-indic \
-  fonts-ipafont-gothic \
-  fonts-kacst \
-  fonts-liberation \
+  fonts-indic fonts-ipafont-gothic \
+  fonts-kacst fonts-liberation \
   fonts-noto-cjk \
   fonts-noto-color-emoji \
   msttcorefonts \
   fonts-roboto \
   fonts-thai-tlwg \
-  fonts-wqy-zenhei \
-  openssh-server \
-  wget
+  fonts-wqy-zenhei
 msg_ok "Installed Font Packages"
 
 msg_info "Installing X11 Packages"
@@ -122,9 +112,7 @@ $STD apt-get install -y \
   libxrandr2 \
   libxrender1 \
   libxss1 \
-  libxtst6 \
-  openssh-server \
-  wget
+  libxtst6
 msg_ok "Installed X11 Packages"
 
 msg_info "Creating Services"

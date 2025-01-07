@@ -17,17 +17,13 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   sudo \
   curl \
-  mc \
-  openssh-server \
-  wget
+  mc 
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Unbound"
 $STD apt-get install -y \
   unbound \
-  unbound-host \
-  openssh-server \
-  wget
+  unbound-host
 msg_info "Installed Unbound"
 
 cat <<EOF >/etc/unbound/unbound.conf.d/unbound.conf

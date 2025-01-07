@@ -19,8 +19,6 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y avahi-daemon
 $STD apt-get install -y gnupg2
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Fhem Repository"
@@ -31,8 +29,6 @@ msg_ok "Set up Fhem Repository"
 msg_info "Installing Fhem"
 $STD apt-get update
 $STD apt-get install -y fhem
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_info "Installed Fhem"
 
 motd_ssh

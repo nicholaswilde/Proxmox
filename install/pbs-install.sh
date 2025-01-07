@@ -17,8 +17,6 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Proxmox Backup Server"
@@ -28,8 +26,6 @@ deb http://download.proxmox.com/debian/pbs bookworm pbs-no-subscription
 EOF
 $STD apt-get update
 $STD apt-get install -y proxmox-backup-server
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Proxmox Backup Server"
 
 motd_ssh

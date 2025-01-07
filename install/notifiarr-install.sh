@@ -18,8 +18,6 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Notifiarr"
@@ -29,8 +27,6 @@ wget -qO- https://packagecloud.io/golift/pkgs/gpgkey | gpg --dearmor >/usr/share
 echo "deb [signed-by=/usr/share/keyrings/golift-archive-keyring.gpg] https://packagecloud.io/golift/pkgs/ubuntu focal main" >/etc/apt/sources.list.d/golift.list
 $STD apt-get update
 $STD apt-get install -y notifiarr
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Notifiarr"
 
 motd_ssh

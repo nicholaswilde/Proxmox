@@ -24,9 +24,7 @@ $STD apt-get install -y \
   mc \
   nginx \
   php8.2-{bcmath,common,ctype,curl,fileinfo,fpm,gd,iconv,intl,mbstring,mysql,soap,xml,xsl,zip,cli} \
-  mariadb-server \
-  openssh-server \
-  wget
+  mariadb-server 
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up database"

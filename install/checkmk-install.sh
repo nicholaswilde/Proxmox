@@ -18,17 +18,13 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
   sudo \
-  mc \
-  openssh-server \
-  wget
+  mc 
 msg_ok "Installed Dependencies"
 
 msg_info "Install Checkmk"
 RELEASE=$(curl -fsSL https://api.github.com/repos/checkmk/checkmk/tags | grep "name" | awk '{print substr($2, 3, length($2)-4) }' | grep -v "*-rc" | tail -n +2 | head -n 1)
 wget -q https://download.checkmk.com/checkmk/${RELEASE}/check-mk-raw-${RELEASE}_0.bookworm_amd64.deb -O /opt/checkmk.deb
 $STD apt-get install -y /opt/checkmk.deb
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 echo "${RELEASE}" >"/opt/checkmk_version.txt"
 msg_ok "Installed Checkmk"
 

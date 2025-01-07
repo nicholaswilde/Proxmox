@@ -20,15 +20,11 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
 $STD apt-get install -y par2
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 cat <<EOF >/etc/apt/sources.list.d/non-free.list
 deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
 EOF
 $STD apt-get update
 $STD apt-get install -y unrar
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 rm /etc/apt/sources.list.d/non-free.list
 msg_ok "Installed Dependencies"
 
@@ -38,8 +34,6 @@ curl -fsSL https://nzbgetcom.github.io/nzbgetcom.asc | gpg --dearmor -o /etc/apt
 echo "deb [signed-by=/etc/apt/keyrings/nzbgetcom.gpg] https://nzbgetcom.github.io/deb stable main" >/etc/apt/sources.list.d/nzbgetcom.list
 $STD apt-get update
 $STD apt-get install -y nzbget
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed NZBGet"
 
 motd_ssh

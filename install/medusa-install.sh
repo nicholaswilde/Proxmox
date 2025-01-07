@@ -22,16 +22,12 @@ $STD apt-get install -y \
   sudo \
   mc \
   git-core \
-  mediainfo \
-  openssh-server \
-  wget
+  mediainfo
 cat <<EOF >/etc/apt/sources.list.d/non-free.list
 deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
 EOF
 $STD apt-get update
 $STD apt-get install -y unrar
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 rm /etc/apt/sources.list.d/non-free.list
 msg_ok "Installed Dependencies"
 
