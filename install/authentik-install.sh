@@ -43,14 +43,14 @@ msg_ok "Installed Dependencies"
 msg_info "Installing yq"
 cd /tmp
 YQ_LATEST="$(wget -qO- "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
-wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_LATEST}/yq_linux_arm64" -qO /usr/bin/yq
+wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_LATEST}/yq_linux_amd64" -qO /usr/bin/yq
 chmod +x /usr/bin/yq
 msg_ok "Installed yq"
 
 msg_info "Installing GeoIP"
 cd /tmp
 GEOIP_RELEASE=$(curl -s https://api.github.com/repos/maxmind/geoipupdate/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-wget -qO geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v${GEOIP_RELEASE}/geoipupdate_${GEOIP_RELEASE}_linux_arm64.deb
+wget -qO geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v${GEOIP_RELEASE}/geoipupdate_${GEOIP_RELEASE}_linux_amd64.deb
 $STD dpkg -i geoipupdate.deb
 cat <<EOF >/etc/GeoIP.conf
 #GEOIPUPDATE_EDITION_IDS="GeoLite2-City GeoLite2-ASN"
@@ -80,12 +80,14 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing Golang"
 cd /tmp
 set +o pipefail
-GO_RELEASE=$(curl -s https://go.dev/dl/ | grep -o -m 1 "go.*\linux-arm64.tar.gz")
+GO_RELEASE=$(curl -s https://go.dev/dl/ | grep -o -m 1 "go.*\linux-amd64.tar.gz")
 wget -q https://golang.org/dl/${GO_RELEASE}
 tar -xzf ${GO_RELEASE} -C /usr/local
 ln -s /usr/local/go/bin/go /usr/bin/go
@@ -94,11 +96,15 @@ msg_ok "Installed Golang"
 
 msg_info "Installing Redis"
 $STD apt-get install -y redis-server
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 systemctl enable -q --now redis-server
 msg_ok "Installed Redis"
 
 msg_info "Installing PostgreSQL"
 $STD apt-get install -y postgresql postgresql-contrib
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 DB_NAME="authentik"
 DB_USER="authentik"
 DB_PASS="$(openssl rand -base64 18 | cut -c1-13)"

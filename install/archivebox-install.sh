@@ -35,7 +35,9 @@ $STD apt-get install -y \
   python3-pip \
   python3-ldap \
   python3-msgpack \
-  python3-regex 
+  python3-regex \
+  openssh-server \
+  wget
 msg_ok "Installed Python Dependencies"
 
 msg_info "Setting up Node.js Repository"

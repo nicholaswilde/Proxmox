@@ -18,65 +18,16 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y gnupg
 $STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y ffmpeg
-$STD apt-get install -y git
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
-msg_info "Installing Node.js"
+msg_info "Installing audiobookshelf"
+curl -fsSL https://advplyr.github.io/audiobookshelf-ppa/KEY.gpg >/etc/apt/trusted.gpg.d/audiobookshelf-ppa.asc
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/audiobookshelf-ppa.asc] https://advplyr.github.io/audiobookshelf-ppa ./" >/etc/apt/sources.list.d/audiobookshelf.list
 $STD apt-get update
-$STD apt-get install -y nodejs
-$STD apt-get install -y npm
-msg_ok "Installed Node.js"
-
-msg_info "Installing audiobookshelf (Patience)"
-$STD git clone https://github.com/advplyr/audiobookshelf /opt/audiobookshelf
-cd /opt/audiobookshelf
-mv ./.devcontainer/dev.js ./dev.js
-sed -i 's/Port: 3333/Port: 13378/' ./dev.js
-sed -i "s|ConfigPath: Path.resolve('config'),|ConfigPath: '/usr/share/audiobookshelf/config',|" ./dev.js
-sed -i "s|MetadataPath: Path.resolve('metadata'),|MetadataPath: '/usr/share/audiobookshelf/metadata',|" ./dev.js
-$STD npm ci 
-cd client
-$STD npm ci
-$STD npm run generate
-mkdir -p /usr/share/audiobookshelf/config
-mkdir -p /usr/share/audiobookshelf/metadata
+$STD apt install audiobookshelf
 msg_ok "Installed audiobookshelf"
-
-msg_info "Creating Service"
-cat <<EOF >/etc/systemd/system/audiobookshelf_client.service
-[Unit]
-Description=Audiobookshelf Client Service
-After=network.target
-
-[Service]
-Type=simple
-WorkingDirectory=/opt/audiobookshelf/client
-ExecStart=/usr/bin/npm run dev
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-EOF
-cat <<EOF >/etc/systemd/system/audiobookshelf_server.service
-[Unit]
-Description=Audiobookshelf Server Service
-After=network.target
-
-[Service]
-Type=simple
-WorkingDirectory=/opt/audiobookshelf/
-ExecStart=/usr/bin/npm run dev
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl enable -q --now audiobookshelf_server.service
-systemctl enable -q --now audiobookshelf_client.service
-msg_ok "Created Service"
 
 motd_ssh
 customize

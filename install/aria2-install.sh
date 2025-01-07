@@ -23,6 +23,8 @@ msg_ok "Installed Dependencies"
 
 msg_info "Installing Aria2"
 $STD apt-get install -y aria2
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Aria2"
 
 read -r -p "Would you like to add AriaNG? <y/N> " prompt

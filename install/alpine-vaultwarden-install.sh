@@ -21,7 +21,6 @@ $STD apk add openssh
 $STD apk add nano
 $STD apk add mc
 $STD apk add argon2
-$STD apk add openssh
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Alpine-Vaultwarden"
