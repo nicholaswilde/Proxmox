@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 # Source: https://github.com/diced/zipline
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -22,8 +22,8 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  openssh-server \
-  wget
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -35,8 +35,6 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 $STD npm install -g yarn
 msg_ok "Installed Node.js"
 

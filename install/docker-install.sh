@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
@@ -18,7 +18,6 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 get_latest_release() {
@@ -64,6 +63,7 @@ else
     msg_ok "Installed Portainer Agent $PORTAINER_AGENT_LATEST_VERSION"
   fi
 fi
+
 
 motd_ssh
 customize

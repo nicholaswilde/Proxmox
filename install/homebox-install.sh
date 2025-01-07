@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
@@ -20,13 +20,13 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  openssh-server \
-  wget
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Homebox"
 RELEASE=$(curl -s https://api.github.com/repos/sysadminsmedia/homebox/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
-wget -qO- https://github.com/sysadminsmedia/homebox/releases/download/${RELEASE}/homebox_Linux_x86_64.tar.gz | tar -xzf - -C /opt
+wget -qO- https://github.com/sysadminsmedia/homebox/releases/download/${RELEASE}/homebox_Linux_arm64.tar.gz | tar -xzf - -C /opt
 chmod +x /opt/homebox
 cat <<EOF >/opt/.env
 # For possible environment variables check here: https://homebox.software/en/configure-homebox

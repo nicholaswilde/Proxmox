@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -19,8 +19,8 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y ufw
 $STD apt-get install -y ntp
-$STD apt-get install -y openssh-server
 $STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Pi-hole"
@@ -49,8 +49,6 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   read -r -p "Unbound is configured as a recursive DNS server by default, would you like it to be configured as a forwarding DNS server (using DNS-over-TLS (DoT)) instead? <y/N> " prompt
   msg_info "Installing Unbound"
   $STD apt-get install -y unbound
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
   cat <<EOF >/etc/unbound/unbound.conf.d/pi-hole.conf
 server:
   verbosity: 0

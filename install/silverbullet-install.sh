@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 community-scripts ORG
+# Copyright (c) 2021-2025 community-scripts ORG
 # Author: Dominik Siebel (dsiebel)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -18,15 +18,15 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  openssh-server \
-  wget
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Silverbullet"
 RELEASE=$(curl -s https://api.github.com/repos/silverbulletmd/silverbullet/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
 mkdir -p /opt/silverbullet/bin /opt/silverbullet/space
-wget -q https://github.com/silverbulletmd/silverbullet/releases/download/${RELEASE}/silverbullet-server-linux-x86_64.zip
-unzip -oq -d /opt/silverbullet/bin/ silverbullet-server-linux-x86_64.zip
+wget -q https://github.com/silverbulletmd/silverbullet/releases/download/${RELEASE}/silverbullet-server-linux-aarch64.zip
+unzip -oq -d /opt/silverbullet/bin/ silverbullet-server-linux-aarch64.zip
 chmod +x /opt/silverbullet/bin/silverbullet
 echo "${RELEASE}" >/opt/${APPLICATION}_version.txt
 msg_ok "Installed Silverbullet"
@@ -55,7 +55,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf silverbullet-server-linux-x86_64.zip
+rm -rf silverbullet-server-linux-aarch64.zip
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

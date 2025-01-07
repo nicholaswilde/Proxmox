@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 community-scripts ORG
+# Copyright (c) 2021-2025 community-scripts ORG
 # Author: bvdberg01
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -32,8 +32,8 @@ $STD apt-get install -y \
   libpq-dev \
   libssl-dev \
   zlib1g-dev \
-  openssh-server \
-  wget
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 community-scripts ORG
+# Copyright (c) 2021-2025 community-scripts ORG
 # Author: wimb0
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -18,16 +18,14 @@ $STD apt-get install -y \
   sudo \
   curl \
   mc \
-  openssh-server \
-  wget
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Unbound"
 $STD apt-get install -y \
   unbound \
-  unbound-host \
-  openssh-server \
-  wget
+  unbound-host
 msg_info "Installed Unbound"
 
 cat <<EOF >/etc/unbound/unbound.conf.d/unbound.conf

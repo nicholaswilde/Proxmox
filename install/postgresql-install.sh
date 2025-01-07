@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -18,8 +18,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gnupg
-$STD apt-get install -y openssh-server
 $STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL Repository"
@@ -31,8 +31,6 @@ msg_ok "Setup PostgreSQL Repository"
 msg_info "Installing PostgreSQL"
 $STD apt-get update
 $STD apt-get install -y postgresql
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 
 cat <<EOF >/etc/postgresql/17/main/pg_hba.conf
 # PostgreSQL Client Authentication Configuration File

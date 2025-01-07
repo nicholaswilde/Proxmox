@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -14,16 +14,14 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y {curl,sudo,mc,gpg,arp-scan,ieee-data,libwww-perl}
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
+$STD apt-get install -y {curl,sudo,mc,gpg,arp-scan,ieee-data,libwww-perl,wget,openssh-server}
 msg_ok "Installed Dependencies"
 
 msg_info "Installing WatchYourLAN"
 RELEASE=$(curl -s https://api.github.com/repos/aceberg/WatchYourLAN/releases/latest | grep -o '"tag_name": *"[^"]*"' | cut -d '"' -f 4)
-wget -q https://github.com/aceberg/WatchYourLAN/releases/download/$RELEASE/watchyourlan_${RELEASE}_linux_amd64.deb
-$STD dpkg -i watchyourlan_${RELEASE}_linux_amd64.deb
-rm watchyourlan_${RELEASE}_linux_amd64.deb
+wget -q https://github.com/aceberg/WatchYourLAN/releases/download/$RELEASE/watchyourlan_${RELEASE}_linux_arm64.deb
+$STD dpkg -i watchyourlan_${RELEASE}_linux_arm64.deb
+rm watchyourlan_${RELEASE}_linux_arm64.deb
 mkdir /data
 cat <<EOF >/data/config.yaml
 arp_timeout: "500"

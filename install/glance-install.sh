@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 community-scripts ORG
+# Copyright (c) 2021-2025 community-scripts ORG
 # Author: kristocopani
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -15,20 +15,20 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-  curl \
-  sudo \
-  mc \
-  openssh-server \
-  wget
+    curl \
+    sudo \
+    mc \
+    wget \
+    openssh-server
 msg_ok "Installed Dependencies"
 
 
 msg_info "Installing Glance"
 RELEASE=$(curl -s https://api.github.com/repos/glanceapp/glance/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
 cd /opt
-wget -q https://github.com/glanceapp/glance/releases/download/v${RELEASE}/glance-linux-amd64.tar.gz
+wget -q https://github.com/glanceapp/glance/releases/download/v${RELEASE}/glance-linux-arm64.tar.gz
 mkdir -p /opt/glance
-tar -xzf glance-linux-amd64.tar.gz -C /opt/glance
+tar -xzf glance-linux-arm64.tar.gz -C /opt/glance
 cat <<EOF >/opt/glance/glance.yml
 pages:
   - name: Startpage
@@ -77,7 +77,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf /opt/glance-linux-amd64.tar.gz
+rm -rf /opt/glance-linux-arm64.tar.gz
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

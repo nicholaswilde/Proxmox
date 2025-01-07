@@ -4,7 +4,7 @@
 # Author: tteck (tteckster)
 # Co-Author: remz1337
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,8 +19,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y imagemagick
-$STD apt-get install -y openssh-server
 $STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
@@ -31,8 +31,8 @@ msg_ok "Installed Python Dependencies"
 msg_info "Installing Kepubify"
 mkdir -p /opt/kepubify
 cd /opt/kepubify
-curl -fsSLO https://github.com/pgaskin/kepubify/releases/latest/download/kepubify-linux-arm64 &>/dev/null
-chmod +x kepubify-linux-arm64
+curl -fsSLO https://github.com/pgaskin/kepubify/releases/latest/download/kepubify-linux-64bit &>/dev/null
+chmod +x kepubify-linux-64bit
 msg_ok "Installed Kepubify"
 
 msg_info "Installing Calibre-Web"

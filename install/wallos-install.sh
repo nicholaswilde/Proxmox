@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
@@ -23,8 +23,9 @@ $STD apt-get install -y \
   apache2 \
   libapache2-mod-php \
   php8.2-{mbstring,gd,curl,intl,imagick,bz2,sqlite3,zip,xml} \
+  wget \
   openssh-server \
-  wget
+  cron
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Wallos (Patience)"

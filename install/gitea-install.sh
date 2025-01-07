@@ -4,7 +4,7 @@
 # Author: tteck (tteckster)
 # Co-author: Rogue-King
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -26,7 +26,7 @@ msg_ok "Installed Dependencies"
 
 msg_info "Installing Gitea"
 RELEASE=$(wget -q https://github.com/go-gitea/gitea/releases/latest -O - | grep "title>Release" | cut -d " " -f 4 | sed 's/^v//')
-wget -q https://github.com/go-gitea/gitea/releases/download/v$RELEASE/gitea-$RELEASE-linux-amd64
+wget -q https://github.com/go-gitea/gitea/releases/download/v$RELEASE/gitea-$RELEASE-linux-arm64
 mv gitea* /usr/local/bin/gitea
 chmod +x /usr/local/bin/gitea
 adduser --system --group --disabled-password --shell /bin/bash --home /etc/gitea gitea > /dev/null

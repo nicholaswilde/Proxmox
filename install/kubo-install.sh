@@ -2,9 +2,8 @@
 
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
-# Co-Author: ulmentflam
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,14 +18,14 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
-$STD apt-get install -y openssh-server
 $STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing IPFS"
 RELEASE=$(wget -q https://github.com/ipfs/kubo/releases/latest -O - | grep "title>Release" | cut -d " " -f 4)
-$STD wget -q "https://github.com/ipfs/kubo/releases/download/${RELEASE}/kubo_${RELEASE}_linux-amd64.tar.gz"
-tar -xzf "kubo_${RELEASE}_linux-amd64.tar.gz" -C /usr/local
+$STD wget -q "https://github.com/ipfs/kubo/releases/download/${RELEASE}/kubo_${RELEASE}_linux-arm64.tar.gz"
+tar -xzf "kubo_${RELEASE}_linux-arm64.tar.gz" -C /usr/local
 $STD ln -s /usr/local/kubo/ipfs /usr/local/bin/ipfs
 $STD ipfs init
 ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
@@ -35,7 +34,7 @@ LXCIP=$(hostname -I | awk '{print $1}')
 ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin "[\"http://${LXCIP}:5001\", \"http://localhost:3000\", \"http://127.0.0.1:5001\", \"https://webui.ipfs.io\", \"http://0.0.0.0:5001\"]"
 ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
 echo "${RELEASE}" >"/opt/${APPLICATION}_version.txt"
-$STD rm "kubo_${RELEASE}_linux-amd64.tar.gz"
+$STD rm "kubo_${RELEASE}_linux-arm64.tar.gz"
 msg_ok "Installed IPFS"
 
 msg_info "Creating Service"

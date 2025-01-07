@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 community-scripts ORG
+# Copyright (c) 2021-2025 community-scripts ORG
 # Author: davalanche
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -20,20 +20,16 @@ $STD apt-get install -y \
   sudo \
   mc \
   jq \
-  openssh-server \
-  wget
+  wget \
+  openssh-server
 echo "deb http://deb.debian.org/debian bookworm non-free non-free-firmware" > /etc/apt/sources.list.d/non-free.list
 $STD apt-get update
 $STD apt-get install -y unrar
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 rm /etc/apt/sources.list.d/non-free.list
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"
 $STD apt-get install -y python3-pip
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip install -U --no-cache-dir pip
 msg_ok "Updated Python3"

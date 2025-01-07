@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -14,22 +14,28 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y \
-  mc \
-  curl \
-  sudo \
-  openssh-server \
-  wget
+$STD apt-get install -y curl
+$STD apt-get install -y sudo
+$STD apt-get install -y mc
+$STD apt-get install -y unzip
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing ASP.NET Core Runtime"
-wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
-$STD dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-$STD apt-get update
-$STD apt-get install -y dotnet-sdk-9.0
-$STD apt-get install -y openssh-server
-$STD apt-get install -y wget
+$STD apt-get install -y libc6
+$STD apt-get install -y libgcc1
+$STD apt-get install -y libgssapi-krb5-2
+$STD apt-get install -y libicu72
+$STD apt-get install -y liblttng-ust1
+$STD apt-get install -y libssl3
+$STD apt-get install -y libstdc++6
+$STD apt-get install -y zlib1g
+
+curl -SL -o dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/6f79d99b-dc38-4c44-a549-32329419bb9f/a411ec38fb374e3a4676647b236ba021/dotnet-sdk-9.0.100-linux-arm64.tar.gz
+mkdir -p /usr/share/dotnet
+$STD tar -zxf dotnet.tar.gz -C /usr/share/dotnet
+$STD ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 msg_ok "Installed ASP.NET Core Runtime"
 
 msg_info "Installing rdtclient"
