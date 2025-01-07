@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -19,13 +19,13 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
 $STD apt-get install -y sqlite3
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Golang"
 set +o pipefail
-RELEASE=$(curl -s https://go.dev/dl/ | grep -o "go.*\linux-arm64.tar.gz" | head -n 1)
+RELEASE=$(curl -s https://go.dev/dl/ | grep -o "go.*\linux-amd64.tar.gz" | head -n 1)
 wget -q https://golang.org/dl/$RELEASE
 tar -xzf $RELEASE -C /usr/local
 $STD ln -s /usr/local/go/bin/go /usr/local/bin/go
@@ -37,6 +37,8 @@ curl -sS https://ftp.osuosl.org/pub/sftpgo/apt/gpg.key | gpg --dearmor -o /usr/s
 echo "deb [signed-by=/usr/share/keyrings/sftpgo-archive-keyring.gpg] https://ftp.osuosl.org/pub/sftpgo/apt bookworm main" >/etc/apt/sources.list.d/sftpgo.list
 $STD apt-get update
 $STD apt-get install -y sftpgo
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed SFTPGo"
 
 motd_ssh

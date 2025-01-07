@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,8 +18,8 @@ $STD apt-get install -y gnupg
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing MongoDB 4.4"
@@ -35,6 +35,8 @@ fi
 
 $STD apt-get update
 $STD apt-get install -y mongodb-org
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
 systemctl enable -q --now mongod.service
 msg_ok "MongoDB 4.4 Installed"

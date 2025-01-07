@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -17,10 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y ca-certificates
-$STD apt-get install -y wget
 $STD apt-get install -y gpg
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -32,6 +31,8 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD npm install -g pnpm
 msg_ok "Installed Node.js"
 
@@ -46,9 +47,8 @@ rm -rf homepage-${RELEASE}
 cd /opt/homepage
 cp /opt/homepage/src/skeleton/* /opt/homepage/config
 $STD pnpm install
-export NEXT_PUBLIC_VERSION="v$RELEASE"
-export NEXT_PUBLIC_REVISION="source"
-$STD pnpm build
+$STD export NEXT_PUBLIC_VERSION=v$RELEASE 
+$STD export NEXT_PUBLIC_REVISION='source' $STD pnpm build
 echo "${RELEASE}" >/opt/${APPLICATION}_version.txt
 msg_ok "Installed Homepage v${RELEASE}"
 

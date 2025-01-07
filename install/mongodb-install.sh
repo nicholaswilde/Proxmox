@@ -1,6 +1,7 @@
+
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -13,20 +14,13 @@ setting_up_container
 network_check
 update_os
 
-cpu_info=$(lscpu)
-
-if ! echo "$cpu_info" | grep -q 'asimdrdm\|asimdhf\|dotprod\|fp16'; then
-    msg_error "This machine does not support ARMv8.2-A."
-    exit
-fi
-
 msg_info "Installing Dependencies"
 $STD apt-get install -y gnupg
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 # Abfrage für die MongoDB-Version
@@ -42,6 +36,8 @@ wget -qO- https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | gpg
 echo "deb [signed-by=/usr/share/keyrings/mongodb-server-${MONGODB_VERSION}.gpg] http://repo.mongodb.org/apt/debian $(grep '^VERSION_CODENAME=' /etc/os-release | cut -d'=' -f2)/mongodb-org/${MONGODB_VERSION} main" >/etc/apt/sources.list.d/mongodb-org-${MONGODB_VERSION}.list
 $STD apt-get update
 $STD apt-get install -y mongodb-org
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
 systemctl enable -q --now mongod.service
 msg_ok "Installed MongoDB $MONGODB_VERSION"

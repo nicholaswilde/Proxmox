@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: havardthom
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,8 +19,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Neo4j (patience)"
@@ -28,6 +28,8 @@ wget -qO- https://debian.neo4j.com/neotechnology.gpg.key | gpg --dearmor -o /etc
 echo 'deb [signed-by=/etc/apt/keyrings/neotechnology.gpg] https://debian.neo4j.com stable latest' > /etc/apt/sources.list.d/neo4j.list
 $STD apt-get update
 $STD apt-get install -y neo4j
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 sed -i '/server.default_listen_address/s/^#//' /etc/neo4j/neo4j.conf
 systemctl enable -q --now neo4j
 msg_ok "Installed Neo4j"

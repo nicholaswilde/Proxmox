@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -20,8 +20,8 @@ $STD apt-get install -y mc
 $STD apt-get install -y lsb-base
 $STD apt-get install -y lsb-release
 $STD apt-get install -y gnupg2
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up InfluxDB Repository"
@@ -40,10 +40,14 @@ msg_info "Installing InfluxDB"
 $STD apt-get update
 if [[ $INFLUX == "2" ]]; then
   $STD apt-get install -y influxdb2
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 else
   $STD apt-get install -y influxdb
-  wget -q https://dl.influxdata.com/chronograf/releases/chronograf_1.10.1_arm64.deb
-  $STD dpkg -i chronograf_1.10.1_arm64.deb
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
+  wget -q https://dl.influxdata.com/chronograf/releases/chronograf_1.10.1_amd64.deb
+  $STD dpkg -i chronograf_1.10.1_amd64.deb
 fi
 $STD systemctl enable --now influxdb
 msg_ok "Installed InfluxDB"
@@ -52,6 +56,8 @@ read -r -p "Would you like to add Telegraf? <y/N> " prompt
 if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
   msg_info "Installing Telegraf"
   $STD apt-get install -y telegraf
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
   msg_ok "Installed Telegraf"
 fi
 

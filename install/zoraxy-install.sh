@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,15 +17,15 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Zoraxy (Patience)"
 RELEASE=$(curl -s https://api.github.com/repos/tobychui/zoraxy/releases/latest  | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
-wget -q "https://github.com/tobychui/zoraxy/releases/download/${RELEASE}/zoraxy_linux_arm64"
+wget -q "https://github.com/tobychui/zoraxy/releases/download/${RELEASE}/zoraxy_linux_amd64"
 mkdir -p /opt/zoraxy
-mv zoraxy_linux_arm64 /opt/zoraxy/zoraxy
+mv zoraxy_linux_amd64 /opt/zoraxy/zoraxy
 chmod +x /opt/zoraxy/zoraxy
 ln -s /opt/zoraxy/zoraxy /usr/local/bin/zoraxy
 echo "${RELEASE}" >/opt/${APPLICATION}_version.txt

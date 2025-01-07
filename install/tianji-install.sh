@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/msgbyte/tianji
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -29,8 +29,8 @@ $STD apt-get install -y \
   gnupg \
   ca-certificates \
   mc \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Node.js"
@@ -39,6 +39,8 @@ curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dea
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD npm install -g pnpm@9.7.1
 export NODE_OPTIONS="--max_old_space_size=4096"
 msg_ok "Installed Node.js"

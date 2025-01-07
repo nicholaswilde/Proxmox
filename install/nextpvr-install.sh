@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 communtiy-scripts ORG
+# Copyright (c) 2021-2024 communtiy-scripts ORG
 # Author: MickLesk (Canbiz)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -28,8 +28,8 @@ $STD apt-get install -y \
   libc6-dev \
   ffmpeg \
   mc \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setup NextPVR (Patience)"

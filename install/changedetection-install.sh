@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -45,15 +45,17 @@ $STD apt-get install -y \
   xvfb \
   ca-certificates \
   gnupg \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Updating Python3"
 $STD apt-get install -y \
   python3 \
   python3-dev \
-  python3-pip
+  python3-pip \
+  openssh-server \
+  wget
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Updated Python3"
 
@@ -90,14 +92,16 @@ $STD apt-get install -y \
   libfontconfig1 \
   fonts-freefont-ttf \
   fonts-gfs-neohellenic \
-  fonts-indic fonts-ipafont-gothic \
-  fonts-kacst fonts-liberation \
+  fonts-indic \
+  fonts-ipafont-gothic \
+  fonts-kacst \
+  fonts-liberation \
   fonts-noto-cjk \
   fonts-noto-color-emoji \
   msttcorefonts \
   fonts-roboto \
   fonts-thai-tlwg \
-  fonts-wqy-zenhei
+  fonts-wqy-zenhei 
 msg_ok "Installed Font Packages"
 
 msg_info "Installing X11 Packages"
@@ -114,7 +118,7 @@ $STD apt-get install -y \
   libxrandr2 \
   libxrender1 \
   libxss1 \
-  libxtst6
+  libxtst6 
 msg_ok "Installed X11 Packages"
 
 msg_info "Creating Services"

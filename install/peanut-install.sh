@@ -2,8 +2,9 @@
 
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
+# Co-Author: remz1337
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,8 +19,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Node.js"
@@ -28,10 +29,14 @@ curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dea
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
 msg_info "Installing NUT"
 $STD apt-get install -y nut-client
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed NUT"
 
 msg_info "Installing Peanut"

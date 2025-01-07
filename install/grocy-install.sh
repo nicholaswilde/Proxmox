@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,8 +18,8 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y apt-transport-https
-$STD apt-get install -y wget
 $STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing PHP8.2"
@@ -33,6 +33,8 @@ $STD apt-get install -y php8.2-sqlite3
 $STD apt-get install -y php8.2-gd
 $STD apt-get install -y php8.2-intl
 $STD apt-get install -y php8.2-mbstring
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed PHP8.2"
 
 msg_info "Installing grocy"

@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/seanmorley15/AdventureLog
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
@@ -25,7 +25,10 @@ $STD apt-get install -y \
   libgdal-dev \
   git \
   python3-venv \
-  python3-pip
+  python3-pip \
+  openssh-server \
+  wget
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

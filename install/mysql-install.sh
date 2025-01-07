@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
@@ -22,8 +22,8 @@ $STD apt-get install -y \
   curl \
   gnupg \
   mc \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 RELEASE_REPO="mysql-8.0"
@@ -41,7 +41,9 @@ $STD apt-get update
 export DEBIAN_FRONTEND=noninteractive
 $STD apt-get install -y \
   mysql-community-client \
-  mysql-community-server
+  mysql-community-server \
+  openssh-server \
+  wget
 msg_ok "Installed MySQL"
 
 msg_info "Configure MySQL Server"
@@ -56,14 +58,16 @@ read -r -p "Would you like to add PhpMyAdmin? <y/N> " prompt
 if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   msg_info "Installing phpMyAdmin"
   $STD apt-get install -y \
-    apache2 \
-    php \
-    php-mysqli \
-    php-mbstring \
-    php-zip \
-    php-gd \
-    php-json \
-    php-curl 
+  apache2 \
+  php \
+  php-mysqli \
+  php-mbstring \
+  php-zip \
+  php-gd \
+  php-json \
+  php-curl \
+  openssh-server \
+  wget
 	
 	wget -q "https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.tar.gz"
 	mkdir -p /var/www/html/phpMyAdmin

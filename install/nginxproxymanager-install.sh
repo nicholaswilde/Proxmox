@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
@@ -27,10 +27,9 @@ $STD apt-get -y install \
   apache2-utils \
   logrotate \
   build-essential \
-  git \
-  wget \
-  openssh-server
+  git
 msg_ok "Installed Dependencies"
+
 msg_info "Installing Python Dependencies"
 $STD apt-get install -y \
   python3 \
@@ -39,10 +38,12 @@ $STD apt-get install -y \
   python3-venv \
   python3-cffi \
   python3-certbot \
-  python3-certbot-dns-cloudflare
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
-$STD pip3 install certbot-dns-multi==4.15.0
+  python3-certbot-dns-cloudflare \
+  openssh-server \
+  wget
+$STD pip3 install certbot-dns-multi
 $STD python3 -m venv /opt/certbot/
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
 
 VERSION="$(awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release)"

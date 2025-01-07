@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -33,7 +33,6 @@ $STD apt-get -y install \
   aria2 \
   wakeonlan \
   wget \
-  cron \
   openssh-server
 msg_ok "Installed Dependencies"
 
@@ -70,7 +69,7 @@ mv /var/www/html/index.lighttpd.html /var/www/html/index.lighttpd.html.old
 ln -s /usr/share/ieee-data/ /var/lib/
 ln -s /opt/pialert/install/index.html /var/www/html/index.html
 ln -s /opt/pialert/front /var/www/html/pialert
-chmod go+x /opt/pialert /opt/pialert/back/shoutrrr/arm64/shoutrrr
+chmod go+x /opt/pialert /opt/pialert/back/shoutrrr/x86/shoutrrr
 chgrp -R www-data /opt/pialert/db /opt/pialert/front/reports /opt/pialert/config /opt/pialert/config/pialert.conf
 chmod -R 775 /opt/pialert/db /opt/pialert/db/temp /opt/pialert/config /opt/pialert/front/reports
 touch /opt/pialert/log/pialert.vendors.log /opt/pialert/log/pialert.IP.log /opt/pialert/log/pialert.1.log /opt/pialert/log/pialert.cleanup.log /opt/pialert/log/pialert.webservices.log

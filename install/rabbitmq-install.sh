@@ -4,7 +4,7 @@
 # Author: tteck
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://www.rabbitmq.com/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -20,13 +20,12 @@ $STD apt-get install -y \
   sudo \
   lsb-release \
   curl \
-  gnupg   \
+  gnupg \
   apt-transport-https \
   make \
   mc \
-  wget \
   openssh-server \
-  software-properties-common
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Adding RabbitMQ signing key"
@@ -37,11 +36,14 @@ msg_ok "Signing keys added"
 
 msg_info "Adding RabbitMQ repository"
 cat <<EOF >/etc/apt/sources.list.d/rabbitmq.list
+## Provides modern Erlang/OTP releases from a Cloudsmith mirror
+deb [signed-by=/usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg] https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/debian $(lsb_release -cs) main
+deb-src [signed-by=/usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg] https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/deb/debian $(lsb_release -cs) main
+
 ## Provides RabbitMQ from a Cloudsmith mirror
-deb [signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu $(lsb_release -cs) main
-deb-src [signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/ubuntu $(lsb_release -cs) main
+deb [signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/debian $(lsb_release -cs) main
+deb-src [signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/deb/debian $(lsb_release -cs) main
 EOF
-$STD add-apt-repository -y ppa:rabbitmq/rabbitmq-erlang
 msg_ok "RabbitMQ repository added"
 
 msg_info "Updating package list"

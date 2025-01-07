@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck
 # Co-Author: MountyMapleSyrup (MountyMapleSyrup)
 # License: MIT
@@ -15,24 +15,19 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y \
-    curl \
-    sudo \
-    mc \
-    git \
-    libpng-dev \
-    libjpeg-dev \
-    libtiff-dev \
-    imagemagick \
-    wget \
-    openssh-server
+$STD apt-get install -y curl
+$STD apt-get install -y sudo
+$STD apt-get install -y mc
+$STD apt-get install -y git
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3 Dependencies"
-$STD apt-get install -y \
-    pip \
-    python3-irc
-rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
+$STD apt-get install -y pip
+$STD apt-get install -y python3-irc
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD pip install jaraco.stream
 $STD pip install python-Levenshtein
 $STD pip install soupsieve
@@ -40,8 +35,6 @@ msg_ok "Installed Python3 Dependencies"
 
 msg_info "Installing LazyLibrarian"
 $STD git clone https://gitlab.com/LazyLibrarian/LazyLibrarian /opt/LazyLibrarian
-cd /opt/LazyLibrarian
-$STD pip install .
 msg_ok "Installed LazyLibrarian"
 
 msg_info "Creating Service"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2024 community-scripts ORG
 # Author: kristocopani
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -15,14 +15,13 @@ update_os
 
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
-    curl \
-    mc \
-    sudo \
-    default-jdk \
-    git \
-    git-lfs \
-    wget \
-    openssh-server
+  curl \
+  mc \
+  sudo \
+  default-jdk \
+  git \
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 

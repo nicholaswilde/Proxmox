@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -26,8 +26,8 @@ $STD apt-get install -y \
   procps \
   dnsutils \
   ripgrep \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
@@ -35,7 +35,7 @@ $STD apt-get install -y \
   python3-pip \
   python3-ldap \
   python3-msgpack \
-  python3-regex
+  python3-regex 
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
 
@@ -48,16 +48,18 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Node.js"
 
-msg_info "Installing Playwright"
-$STD pip install playwright 
-$STD playwright install-deps chromium 
-msg_ok "Installed Playwright"
+msg_info "Installing Playright/Chromium"
+$STD pip install playwright
+$STD playwright install --with-deps chromium
+msg_ok "Installed Playright/Chromium"
 
-msg_info "Installing Chromium and ArchiveBox"
+msg_info "Installing ArchiveBox"
 mkdir -p /opt/archivebox/{data,.npm,.cache,.local}
-$STD adduser --system --shell /bin/bash --gecos 'Archive Box User' --group --disabled-password --home /home/archivebox archivebox
+$STD adduser --system --shell /bin/bash --gecos 'Archive Box User' --group --disabled-password  archivebox
 chown -R archivebox:archivebox /opt/archivebox/{data,.npm,.cache,.local}
 chmod -R 755 /opt/archivebox/data
 $STD pip install archivebox
@@ -66,7 +68,6 @@ expect <<EOF
 set timeout -1
 log_user 0
 
-spawn sudo -u archivebox playwright install chromium
 spawn sudo -u archivebox archivebox setup
 
 expect "Username"

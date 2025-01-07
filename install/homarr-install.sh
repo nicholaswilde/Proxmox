@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
@@ -16,17 +16,13 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y \
-  sudo \
-  mc \
-  curl \
-  ca-certificates \
-  gnupg \
-  make \
-  g++ \
-  build-essential \
-  wget \
-  openssh-server
+$STD apt-get install -y curl
+$STD apt-get install -y sudo
+$STD apt-get install -y mc
+$STD apt-get install -y ca-certificates
+$STD apt-get install -y gnupg
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -38,6 +34,8 @@ msg_ok "Set up Node.js Repository"
 msg_info "Installing Node.js/Yarn"
 $STD apt-get update
 $STD apt-get install -y nodejs
+$STD apt-get install -y openssh-server
+$STD apt-get install -y wget
 $STD npm install -g yarn
 msg_ok "Installed Node.js/Yarn"
 

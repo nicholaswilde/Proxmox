@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-#Copyright (c) 2021-2025 community-scripts ORG
+#Copyright (c) 2021-2024 community-scripts ORG
 # Author: Michel Roegl-Brunner (michelroegl-brunner)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -25,8 +25,8 @@ $STD apt-get install -y \
   nginx \
   php8.2-{bcmath,common,ctype,curl,fileinfo,fpm,gd,iconv,intl,mbstring,mysql,soap,xml,xsl,zip,cli} \
   mariadb-server \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up database"

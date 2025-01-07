@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2024 community-scripts ORG
 # Author: remz1337
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
@@ -36,21 +36,22 @@ $STD apt-get install -y \
   libmaxminddb0 \
   python3-pip \
   git \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Dependencies"
 
 msg_info "Installing yq"
 cd /tmp
 YQ_LATEST="$(wget -qO- "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
-wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_LATEST}/yq_linux_amd64" -qO /usr/bin/yq
+wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_LATEST}/yq_linux_arm64" -qO /usr/bin/yq
 chmod +x /usr/bin/yq
 msg_ok "Installed yq"
 
 msg_info "Installing GeoIP"
 cd /tmp
 GEOIP_RELEASE=$(curl -s https://api.github.com/repos/maxmind/geoipupdate/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-wget -qO geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v${GEOIP_RELEASE}/geoipupdate_${GEOIP_RELEASE}_linux_amd64.deb
+wget -qO geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v${GEOIP_RELEASE}/geoipupdate_${GEOIP_RELEASE}_linux_arm64.deb
 $STD dpkg -i geoipupdate.deb
 cat <<EOF >/etc/GeoIP.conf
 #GEOIPUPDATE_EDITION_IDS="GeoLite2-City GeoLite2-ASN"
@@ -69,6 +70,7 @@ $STD ./configure --enable-optimizations
 $STD make altinstall
 cd ~
 $STD update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.12 1
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Setup Python 3"
 
 msg_info "Setting up Node.js Repository"
@@ -85,7 +87,7 @@ msg_ok "Installed Node.js"
 msg_info "Installing Golang"
 cd /tmp
 set +o pipefail
-GO_RELEASE=$(curl -s https://go.dev/dl/ | grep -o -m 1 "go.*\linux-amd64.tar.gz")
+GO_RELEASE=$(curl -s https://go.dev/dl/ | grep -o -m 1 "go.*\linux-arm64.tar.gz")
 wget -q https://golang.org/dl/${GO_RELEASE}
 tar -xzf ${GO_RELEASE} -C /usr/local
 ln -s /usr/local/go/bin/go /usr/bin/go

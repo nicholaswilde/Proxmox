@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2024 tteck
+# Author: tteck
+# Co-Author: MickLesk (Canbiz)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/Donkie/Spoolman
@@ -24,8 +25,8 @@ $STD apt-get install -y \
   gpg \
   ca-certificates \
   mc \
-  wget \
-  openssh-server
+  openssh-server \
+  wget
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3"
@@ -33,7 +34,9 @@ $STD apt-get install -y \
   python3-dev \
   python3-setuptools \
   python3-wheel \
-  python3-pip
+  python3-pip \
+  openssh-server \
+  wget
 msg_ok "Installed Python3"
 
 msg_info "Installing Spoolman"
