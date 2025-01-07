@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -23,15 +23,17 @@ $STD apt-get install -y alsa-utils
 $STD apt-get install -y libxext-dev
 $STD apt-get install -y fontconfig
 $STD apt-get install -y libva-drm2
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing AgentDVR"
 mkdir -p /opt/agentdvr/agent
-RELEASE=$(curl -s "https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=Linux64&fromVersion=0" | grep -o 'https://.*\.zip')
+RELEASE=$(curl -s "https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=LinuxARM64&fromVersion=0" | grep -o 'https://.*\.zip')
 cd /opt/agentdvr/agent
 wget -q $RELEASE
-$STD unzip Agent_Linux64*.zip
-rm -rf Agent_Linux64*.zip
+$STD unzip Agent_LinuxARM64*.zip
+rm -rf Agent_LinuxARM64*.zip
 chmod +x ./Agent
 msg_ok "Installed AgentDVR"
 

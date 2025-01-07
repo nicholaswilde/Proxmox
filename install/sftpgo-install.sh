@@ -19,11 +19,13 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
 $STD apt-get install -y sqlite3
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Golang"
 set +o pipefail
-RELEASE=$(curl -s https://go.dev/dl/ | grep -o "go.*\linux-amd64.tar.gz" | head -n 1)
+RELEASE=$(curl -s https://go.dev/dl/ | grep -o "go.*\linux-arm64.tar.gz" | head -n 1)
 wget -q https://golang.org/dl/$RELEASE
 tar -xzf $RELEASE -C /usr/local
 $STD ln -s /usr/local/go/bin/go /usr/local/bin/go

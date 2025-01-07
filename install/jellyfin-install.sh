@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,10 +18,12 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y gpg
 $STD apt-get install -y mc
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting Up Hardware Acceleration"
-$STD apt-get -y install {va-driver-all,ocl-icd-libopencl1,intel-opencl-icd,vainfo,intel-gpu-tools}
+$STD apt-get -y install {va-driver-all,ocl-icd-libopencl1,vainfo}
 if [[ "$CTTYPE" == "0" ]]; then
   chgrp video /dev/dri
   chmod 755 /dev/dri
@@ -45,7 +47,7 @@ Types: deb
 URIs: https://repo.jellyfin.org/${PCT_OSTYPE}
 Suites: ${VERSION}
 Components: main
-Architectures: amd64
+Architectures: arm64
 Signed-By: /etc/apt/keyrings/jellyfin.gpg
 EOF
 # Install Jellyfin using the metapackage (which will fetch jellyfin-server, jellyfin-web, and jellyfin-ffmpeg5)

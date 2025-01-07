@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 
 color
@@ -19,6 +19,7 @@ $STD apk add curl
 $STD apk add openssh
 $STD apk add nano
 $STD apk add mc
+$STD apk add openssh
 msg_ok "Installed Dependencies"
 
 motd_ssh

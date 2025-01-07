@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,10 +17,11 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing AdGuard Home"
-$STD tar zxvf <(curl -fsSL https://static.adtidy.org/adguardhome/release/AdGuardHome_linux_amd64.tar.gz) -C /opt
+$STD tar zxvf <(curl -fsSL https://static.adtidy.org/adguardhome/release/AdGuardHome_linux_arm64.tar.gz) -C /opt
 msg_ok "Installed AdGuard Home"
 
 msg_info "Creating Service"

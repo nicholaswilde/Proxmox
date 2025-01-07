@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,11 +19,13 @@ $STD apt-get install -y mc
 $STD apt-get install -y curl
 $STD apt-get install -y ffmpeg
 $STD apt-get install -y vlc
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Threadfin"
 mkdir -p /opt/threadfin
-wget -q -O /opt/threadfin/threadfin 'https://github.com/Threadfin/Threadfin/releases/latest/download/Threadfin_linux_amd64'
+wget -q -O /opt/threadfin/threadfin 'https://github.com/Threadfin/Threadfin/releases/latest/download/Threadfin_linux_arm64'
 chmod +x /opt/threadfin/threadfin
 
 msg_ok "Installed Threadfin"

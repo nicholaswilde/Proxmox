@@ -25,7 +25,9 @@ $STD apt-get install -y \
   libsasl2-dev \
   procps \
   dnsutils \
-  ripgrep
+  ripgrep \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python Dependencies"
@@ -34,6 +36,7 @@ $STD apt-get install -y \
   python3-ldap \
   python3-msgpack \
   python3-regex
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Python Dependencies"
 
 msg_info "Setting up Node.js Repository"

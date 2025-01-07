@@ -24,7 +24,9 @@ $STD apt-get install -y \
   ca-certificates \
   chromium/stable \
   chromium-common/stable \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Additional Tools"

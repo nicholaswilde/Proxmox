@@ -19,7 +19,9 @@ $STD apt-get install -y \
   mc \
   git \
   gpg \
-  sudo
+  sudo \
+  wget \
+  openssh-server
 
 wget -qO- "https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367" | gpg --dearmour >/usr/share/keyrings/ansible-archive-keyring.gpg
 cat <<EOF >/etc/apt/sources.list.d/ansible.list
@@ -33,8 +35,8 @@ msg_info "Setup Semaphore"
 RELEASE=$(curl -s https://api.github.com/repos/semaphoreui/semaphore/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
 mkdir -p /opt/semaphore
 cd /opt/semaphore
-wget -q https://github.com/semaphoreui/semaphore/releases/download/v${RELEASE}/semaphore_${RELEASE}_linux_amd64.deb
-$STD dpkg -i semaphore_${RELEASE}_linux_amd64.deb
+wget -q https://github.com/semaphoreui/semaphore/releases/download/v${RELEASE}/semaphore_${RELEASE}_linux_arm64.deb
+$STD dpkg -i semaphore_${RELEASE}_linux_arm64.deb
 
 SEM_HASH=$(openssl rand -base64 32)
 SEM_ENCRYPTION=$(openssl rand -base64 32)
@@ -81,7 +83,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf semaphore_${RELEASE}_linux_amd64.deb
+rm -rf semaphore_${RELEASE}_linux_arm64.deb
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

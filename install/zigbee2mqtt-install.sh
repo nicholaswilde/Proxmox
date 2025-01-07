@@ -23,7 +23,9 @@ $STD apt-get install -y \
   g++ \
   gcc \
   ca-certificates \
-  gnupg
+  gnupg \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

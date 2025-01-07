@@ -22,7 +22,9 @@ $STD apt-get install -y \
   git \
   gpg \
   ca-certificates \
-  apache2
+  apache2 \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

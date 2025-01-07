@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,12 +18,14 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y sqlite3
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Sonarr v4"
 mkdir -p /var/lib/sonarr/
 chmod 775 /var/lib/sonarr/
-wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x64'
+wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=arm64'
 tar -xzf SonarrV4.tar.gz
 mv Sonarr /opt
 rm -rf SonarrV4.tar.gz

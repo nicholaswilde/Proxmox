@@ -18,7 +18,9 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  postgresql
+  postgresql \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up PostgreSQL"
@@ -40,8 +42,8 @@ cd /opt
 mkdir /opt/listmonk
 mkdir /opt/listmonk/uploads
 RELEASE=$(curl -s https://api.github.com/repos/knadh/listmonk/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-wget -q "https://github.com/knadh/listmonk/releases/download/v${RELEASE}/listmonk_${RELEASE}_linux_amd64.tar.gz"
-tar -xzf "listmonk_${RELEASE}_linux_amd64.tar.gz" -C /opt/listmonk
+wget -q "https://github.com/knadh/listmonk/releases/download/v${RELEASE}/listmonk_${RELEASE}_linux_arm64.tar.gz"
+tar -xzf "listmonk_${RELEASE}_linux_arm64.tar.gz" -C /opt/listmonk
 
 $STD /opt/listmonk/listmonk --new-config --config /opt/listmonk/config.toml
 sed -i -e 's/address = "localhost:9000"/address = "0.0.0.0:9000"/' -e 's/^password = ".*"/password = "'"$DB_PASS"'"/' /opt/listmonk/config.toml
@@ -74,7 +76,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf "/opt/listmonk_${RELEASE}_linux_amd64.tar.gz"
+rm -rf "/opt/listmonk_${RELEASE}_linux_arm64.tar.gz"
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

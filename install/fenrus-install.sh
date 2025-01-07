@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # Co-Author: Scorpoon
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 # Source: https://github.com/revenz/Fenrus
 
 
@@ -22,18 +22,17 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y curl
 $STD apt-get install -y git
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing ASP.NET Core 7 SDK"
-var_os=$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | tr -d '"')
-var_version=$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | tr -d '"')
-if [ "${var_os}" = "debian" ]; then
-  wget -q "https://packages.microsoft.com/config/debian/$var_version/packages-microsoft-prod.deb"
-  $STD dpkg -i packages-microsoft-prod.deb
-  rm packages-microsoft-prod.deb
-fi
-$STD apt-get update
-$STD apt-get install -y dotnet-sdk-7.0
+curl -SL -o dotnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/460f951f-0944-442b-8474-555e20394ca8/5fcf6b1845d87d772f919737b3dd5f55/dotnet-sdk-7.0.408-linux-arm64.tar.gz
+curl -SL -o aspnet.tar.gz https://download.visualstudio.microsoft.com/download/pr/119db743-de75-4bfd-ac51-f2a2bfd1dd1b/4e96dcef933e3787a34691a86f8972cf/aspnetcore-runtime-7.0.18-linux-arm64.tar.gz
+$STD mkdir -p /usr/share/dotnet
+$STD tar -zxf dotnet.tar.gz -C /usr/share/dotnet
+$STD tar -zxf aspnet.tar.gz -C /usr/share/dotnet
+ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 msg_ok "Installed ASP.NET Core 7 SDK"
 
 msg_info "Installing ${APPLICATION}"

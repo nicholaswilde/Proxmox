@@ -20,7 +20,9 @@ $STD apt-get install -y \
     wget \
     mc \
     zip \
-    jq
+    jq \
+    wget \
+    openssh-server
 msg_ok "Installed Dependencies"
 
 

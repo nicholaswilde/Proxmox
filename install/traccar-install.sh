@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -17,15 +17,17 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 RELEASE=$(curl -s https://api.github.com/repos/traccar/traccar/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
 msg_info "Installing Traccar v${RELEASE}"
-wget -q https://github.com/traccar/traccar/releases/download/v${RELEASE}/traccar-linux-64-${RELEASE}.zip
-$STD unzip traccar-linux-64-${RELEASE}.zip
+wget -q https://github.com/traccar/traccar/releases/download/v${RELEASE}/traccar-linux-arm-${RELEASE}.zip
+$STD unzip traccar-linux-arm-${RELEASE}.zip
 $STD ./traccar.run
 systemctl enable -q --now traccar
-rm -rf README.txt  traccar-linux-64-${RELEASE}.zip  traccar.run
+rm -rf README.txt  traccar-linux-arm-${RELEASE}.zip  traccar.run
 msg_ok "Installed Traccar v${RELEASE}"
 
 motd_ssh

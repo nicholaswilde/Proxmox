@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
@@ -37,7 +37,9 @@ $STD apt-get install -y --no-install-recommends \
   libpng-dev \
   libleptonica-dev \
   sudo \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3 Dependencies (Patience)"
@@ -88,6 +90,7 @@ $STD tar -xf paperless-ngx-$Paperlessngx.tar.xz -C /opt/
 mv paperless-ngx paperless
 rm paperless-ngx-$Paperlessngx.tar.xz
 cd /opt/paperless
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip install --upgrade pip
 $STD pip install -r requirements.txt
 curl -s -o /opt/paperless/paperless.conf https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/paperless.conf.example

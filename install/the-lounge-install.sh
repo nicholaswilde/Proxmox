@@ -18,7 +18,9 @@ $STD apt-get install -y \
   curl \
   gpg \
   wget \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

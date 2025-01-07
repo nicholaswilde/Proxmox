@@ -23,13 +23,16 @@ $STD apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libtiff-dev \
-    imagemagick
+    imagemagick \
+    wget \
+    openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3 Dependencies"
 $STD apt-get install -y \
     pip \
     python3-irc
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip install jaraco.stream
 $STD pip install python-Levenshtein
 $STD pip install soupsieve

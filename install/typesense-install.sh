@@ -17,7 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
     curl \
     mc \
-    sudo 
+    sudo \
+    wget \
+    openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing TypeSense"

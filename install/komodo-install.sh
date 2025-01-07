@@ -18,7 +18,9 @@ $STD apt-get install -y \
   curl \
   sudo \
   mc \
-  ca-certificates
+  ca-certificates \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setup Docker Repository"

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,14 +19,16 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y git
 $STD apt-get install -y git-lfs
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Forgejo"
 mkdir -p /opt/forgejo
 RELEASE=$(curl -s https://codeberg.org/api/v1/repos/forgejo/forgejo/releases/latest | grep -oP '"tag_name":\s*"\K[^"]+' | sed 's/^v//')
-wget -qO /opt/forgejo/forgejo-$RELEASE-linux-amd64 "https://codeberg.org/forgejo/forgejo/releases/download/v${RELEASE}/forgejo-${RELEASE}-linux-amd64"
-chmod +x /opt/forgejo/forgejo-$RELEASE-linux-amd64
-ln -sf /opt/forgejo/forgejo-$RELEASE-linux-amd64 /usr/local/bin/forgejo
+wget -qO /opt/forgejo/forgejo-$RELEASE-linux-arm64 "https://codeberg.org/forgejo/forgejo/releases/download/v${RELEASE}/forgejo-${RELEASE}-linux-arm64"
+chmod +x /opt/forgejo/forgejo-$RELEASE-linux-arm64
+ln -sf /opt/forgejo/forgejo-$RELEASE-linux-arm64 /usr/local/bin/forgejo
 msg_ok "Installed Forgejo"
 
 msg_info "Setting up Forgejo"

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,12 +18,14 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y sqlite3
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Readarr"
 mkdir -p /var/lib/readarr/
 chmod 775 /var/lib/readarr/
-$STD wget --content-disposition 'https://readarr.servarr.com/v1/update/develop/updatefile?os=linux&runtime=netcore&arch=x64'
+$STD wget --content-disposition 'https://readarr.servarr.com/v1/update/develop/updatefile?os=linux&runtime=netcore&arch=arm64'
 $STD tar -xvzf Readarr.develop.*.tar.gz
 mv Readarr /opt
 chmod 775 /opt/Readarr

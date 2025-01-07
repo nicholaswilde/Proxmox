@@ -18,7 +18,9 @@ $STD apt-get install -y \
   curl \
   sudo \
   make \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setup Vikunja (Patience)"

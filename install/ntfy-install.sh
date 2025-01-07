@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,12 +19,14 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y gpg
 $STD apt-get install -y apt-transport-https
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing ntfy"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://archive.heckel.io/apt/pubkey.txt | gpg --dearmor -o /etc/apt/keyrings/archive.heckel.io.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main" >/etc/apt/sources.list.d/archive.heckel.io.list  
+echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/archive.heckel.io.gpg] https://archive.heckel.io/apt debian main" >/etc/apt/sources.list.d/archive.heckel.io.list  
 $STD apt-get update
 $STD apt-get install -y ntfy
 systemctl enable -q --now ntfy

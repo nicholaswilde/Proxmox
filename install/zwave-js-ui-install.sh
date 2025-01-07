@@ -17,7 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
   sudo \
-  mc 
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Z-Wave JS UI"
@@ -25,8 +27,8 @@ mkdir -p /opt/zwave-js-ui
 mkdir -p /opt/zwave_store
 cd /opt/zwave-js-ui
 RELEASE=$(curl -s https://api.github.com/repos/zwave-js/zwave-js-ui/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
-wget -q https://github.com/zwave-js/zwave-js-ui/releases/download/${RELEASE}/zwave-js-ui-${RELEASE}-linux.zip
-unzip -q zwave-js-ui-${RELEASE}-linux.zip
+wget -q https://github.com/zwave-js/zwave-js-ui/releases/download/${RELEASE}/zwave-js-ui-${RELEASE}-linux-arm64.zip
+unzip -q zwave-js-ui-${RELEASE}-linux-arm64.zip
 cat <<EOF >/opt/.env
 ZWAVEJS_EXTERNAL_CONFIG=/opt/zwave_store/.config-db
 STORE_DIR=/opt/zwave_store
@@ -57,7 +59,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm zwave-js-ui-${RELEASE}-linux.zip
+rm zwave-js-ui-${RELEASE}-linux-arm64.zip
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

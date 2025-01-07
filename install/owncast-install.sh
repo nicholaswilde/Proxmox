@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,12 +18,14 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y ffmpeg
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Owncast"
 mkdir /opt/owncast
 cd /opt/owncast
-wget -q $(curl -s https://api.github.com/repos/owncast/owncast/releases/latest | grep download | grep linux-64bit | cut -d\" -f4)
+wget -q $(curl -s https://api.github.com/repos/owncast/owncast/releases/latest | grep download | grep linux-arm64 | cut -d\" -f4)
 $STD unzip owncast*.zip
 rm owncast*.zip
 msg_ok "Installed Owncast"

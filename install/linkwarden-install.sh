@@ -22,7 +22,9 @@ $STD apt-get install -y \
   make \
   postgresql \
   cargo \
-  gnupg
+  gnupg \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

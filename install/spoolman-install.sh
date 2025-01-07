@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Copyright (c) 2021-2025 tteck
-# Author: tteck
-# Co-Author: MickLesk (Canbiz)
+# Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/Donkie/Spoolman
@@ -24,7 +23,9 @@ $STD apt-get install -y \
   libpq-dev \
   gpg \
   ca-certificates \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Python3"

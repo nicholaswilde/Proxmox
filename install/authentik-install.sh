@@ -35,7 +35,9 @@ $STD apt-get install -y \
   libxmlsec1-openssl \
   libmaxminddb0 \
   python3-pip \
-  git
+  git \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing yq"

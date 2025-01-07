@@ -23,7 +23,9 @@ $STD apt-get install -y \
   ca-certificates \
   mc \
   unzip \
-  python3.11-venv
+  python3.11-venv \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Node.js"

@@ -17,7 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
     curl \
     mc \
-    sudo
+    sudo \
+    wget \
+    openssh-server
 curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
 echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ bookworm main" >/etc/apt/sources.list.d/php.list
 $STD apt-get update

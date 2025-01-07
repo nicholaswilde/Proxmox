@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -20,12 +20,14 @@ $STD apt-get install -y mc
 $STD apt-get install -y sqlite3
 $STD apt-get install -y libchromaprint-tools
 $STD apt-get install -y mediainfo
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Lidarr"
 mkdir -p /var/lib/lidarr/
 chmod 775 /var/lib/lidarr/
-$STD wget --content-disposition 'https://lidarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64'
+$STD wget --content-disposition 'https://lidarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=arm64'
 $STD tar -xvzf Lidarr.master.*.tar.gz
 mv Lidarr /opt
 chmod 775 /opt/Lidarr

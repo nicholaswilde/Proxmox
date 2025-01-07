@@ -24,7 +24,9 @@ $STD apt-get install -y \
   gnupg \
   make \
   g++ \
-  build-essential
+  build-essential \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"

@@ -44,7 +44,9 @@ $STD apt-get install -y \
   libavfilter-dev \
   libmariadb-dev-compat \
   libatlas-base-dev \
-  software-properties-common
+  software-properties-common \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setup Python3"
@@ -55,6 +57,7 @@ $STD apt-get install -y \
   python3-pip \
   python3.13-dev \
   python3.13-venv
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Setup Python3"
 
 msg_info "Installing UV"

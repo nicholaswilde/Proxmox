@@ -21,7 +21,9 @@ $STD apt-get install -y \
   libubsan1 \
   ffmpeg \
   curl \
-  ca-certificates
+  ca-certificates \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing TeddyCloud"

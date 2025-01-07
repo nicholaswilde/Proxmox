@@ -22,7 +22,9 @@ $STD apt-get install -y \
   php8.2-{apcu,cli,common,curl,gd,imap,ldap,mysql,xmlrpc,xml,mbstring,bcmath,intl,zip,redis,bz2,soap} \
   php-cas \
   libapache2-mod-php \
-  mariadb-server
+  mariadb-server \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up database"

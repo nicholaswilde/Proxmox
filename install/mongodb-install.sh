@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 # Copyright (c) 2021-2025 tteck
@@ -14,11 +13,20 @@ setting_up_container
 network_check
 update_os
 
+cpu_info=$(lscpu)
+
+if ! echo "$cpu_info" | grep -q 'asimdrdm\|asimdhf\|dotprod\|fp16'; then
+    msg_error "This machine does not support ARMv8.2-A."
+    exit
+fi
+
 msg_info "Installing Dependencies"
 $STD apt-get install -y gnupg
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y mc
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 # Abfrage für die MongoDB-Version

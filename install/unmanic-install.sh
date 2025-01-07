@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -19,14 +19,16 @@ $STD apt-get install -y sudo
 $STD apt-get install -y mc
 $STD apt-get install -y ffmpeg
 $STD apt-get install -y python3-pip
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
+rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 msg_ok "Installed Dependencies"
 
 if [[ "$CTTYPE" == "0" ]]; then
   msg_info "Setting Up Hardware Acceleration"
   $STD apt-get -y install \
     va-driver-all \
-    ocl-icd-libopencl1 \
-    intel-opencl-icd
+    ocl-icd-libopencl1
   chgrp video /dev/dri
   chmod 755 /dev/dri
   chmod 660 /dev/dri/*

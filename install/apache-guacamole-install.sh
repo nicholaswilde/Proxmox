@@ -37,7 +37,9 @@ $STD apt-get install -y \
    libavutil-dev \
    libavformat-dev \
    mariadb-server \
-   default-jdk
+   default-jdk \
+   wget \
+   openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setup Apache Tomcat"

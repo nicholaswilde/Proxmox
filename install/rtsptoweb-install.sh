@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 tteck
+# Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/tteck/Proxmox/raw/main/LICENSE
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -18,13 +18,15 @@ $STD apt-get install -y curl
 $STD apt-get install -y sudo
 $STD apt-get install -y git
 $STD apt-get install -y mc
+$STD apt-get install -y wget
+$STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Golang"
-$STD wget https://golang.org/dl/go1.20.1.linux-amd64.tar.gz
-$STD tar -xzf go1.20.1.linux-amd64.tar.gz -C /usr/local
+$STD wget https://golang.org/dl/go1.20.1.linux-arm64.tar.gz
+$STD tar -xzf go1.20.1.linux-arm64.tar.gz -C /usr/local
 $STD ln -s /usr/local/go/bin/go /usr/local/bin/go
-rm -rf go1.20.1.linux-amd64.tar.gz
+rm -rf go1.20.1.linux-arm64.tar.gz
 msg_ok "Installed Golang"
 
 msg_info "Installing RTSPtoWeb"

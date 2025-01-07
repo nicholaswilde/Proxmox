@@ -20,7 +20,9 @@ $STD apt-get install -y \
     sudo \
     default-jdk \
     git \
-    git-lfs
+    git-lfs \
+    wget \
+    openssh-server
 msg_ok "Installed Dependencies"
 
 

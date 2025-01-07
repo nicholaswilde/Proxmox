@@ -18,7 +18,9 @@ $STD apt-get install -y \
     curl \
     sudo \
     gpg \
-    mc 
+    mc \
+    wget \
+    openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Proxmox Datacenter Manager"

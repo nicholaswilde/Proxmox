@@ -17,7 +17,9 @@ msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
   sudo \
-  mc
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Zabbix"
