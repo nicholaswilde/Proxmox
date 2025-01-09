@@ -34,7 +34,7 @@ export const navbarLinks = [
 export const mostPopularScripts = [
   "Proxmox VE Post Install",
   "Docker",
-  "Home Assistant OS",
+  "PiMox HAOS",
 ];
 
 export const analytics = {

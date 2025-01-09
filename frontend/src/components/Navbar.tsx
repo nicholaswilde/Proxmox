@@ -51,7 +51,7 @@ function Navbar() {
               alt="logo"
               src="logo.png"
             />
-            <span className="hidden lg:block">Proxmox VE Helper-Scripts</span>
+            <span className="hidden lg:block">Proxmox ARM64 Helper-Scripts</span>
           </Link>
           <div className="flex gap-2">
             <CommandMenu />

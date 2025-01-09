@@ -54,17 +54,9 @@ function ScriptItem({
                 <div className="ml-4 flex flex-col justify-between">
                   <div className="flex h-full w-full flex-col justify-between">
                     <div>
-                    <h1 className="text-lg font-semibold">
-                      <span title={
-                        item.status === '✅' ? 'This has been tested and should work.' :
-                        item.status === '❌' ? 'This is not supported.' :
-                        item.status === '🚧' ? 'This has not been ported yet.' :
-                        item.status === '🧪' ? 'This has been ported but not tested yet.' :
-                        ''
-                      }>
-                        {item.status}
-                      </span> {item.name} {getDisplayValueFromType(item.type)}
-                    </h1>
+                      <h1 className="text-lg font-semibold">
+                        {item.status} {item.name} {getDisplayValueFromType(item.type)}
+                      </h1>
                       <p className="w-full text-sm text-muted-foreground">
                         Date added: {extractDate(item.date_created)}
                       </p>

@@ -70,9 +70,9 @@ export default function Page() {
               <DialogHeader>
                 <DialogTitle>Thank You!</DialogTitle>
                 <DialogDescription>
-                  A big thank you to Tteck and the many contributors who have
-                  made this project possible. Your hard work is truly
-                  appreciated by the entire Proxmox community!
+                  A big thank you to Tteck, for your hard work over all of these years,
+                  and also to the many other contributors to the project.
+                  Your hard work is truly appreciated by the entire Proxmox community!
                 </DialogDescription>
               </DialogHeader>
               <CardFooter className="flex flex-col gap-2">
@@ -93,7 +93,18 @@ export default function Page() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
                   >
-                    <ExternalLink className="mr-2 h-4 w-4" /> Proxmox Helper
+                    <ExternalLink className="mr-2 h-4 w-4" /> Upstream Proxmox Helper
+                    Scripts
+                  </a>
+                </Button>
+                <Button className="w-full" asChild>
+                  <a
+                    href={`https://github.com/asylumexp/${basePath}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center"
+                  >
+                    <ExternalLink className="mr-2 h-4 w-4" /> ARM64 port - Proxmox Helper
                     Scripts
                   </a>
                 </Button>
@@ -106,8 +117,7 @@ export default function Page() {
               Make managing your Homelab a breeze
             </h1>
             <p className="max-w-2xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground md:text-xl">
-              We are a community-driven initiative that simplifies the setup of
-              Proxmox Virtual Environment (VE).
+              This project aims to take the community-made Proxmox Helper Scripts, originally started by tteck, and port it to arm64.
               <br />
               <br />
               Originally created by{" "}
@@ -118,12 +128,6 @@ export default function Page() {
               <br />
               the process of creating and configuring Linux containers (LXC) and
               virtual machines (VMs) on Proxmox VE.
-              <br />
-              <br />
-              With 200+ scripts to help you manage your{" "}
-              <b>Proxmox VE environment</b>.<br />
-              Whether you&#39;re a seasoned user or a newcomer, we&#39;ve got
-              you covered.
             </p>
           </div>
           <div className="flex flex-row gap-3">
