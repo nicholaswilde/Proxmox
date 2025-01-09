@@ -34,6 +34,7 @@ export type Script = {
       type: keyof typeof AlertColors;
     },
   ];
+  status: string;
 };
 
 export type Category = {

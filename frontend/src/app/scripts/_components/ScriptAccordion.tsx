@@ -117,7 +117,7 @@ export default function ScriptAccordion({
                         className="mr-1 w-4 h-4 rounded-full"
                       />
                       <span className="flex items-center gap-2">
-                        {script.name}
+                        {script.status} {script.name}
                       </span>
                     </div>
                     {formattedBadge(script.type)}
