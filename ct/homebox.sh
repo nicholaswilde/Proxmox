@@ -2,7 +2,7 @@
 source ./misc/build.func
 # Copyright (c) 2021-2025 tteck
 # Author: tteck | Co-Author: MickLesk (Canbiz)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://homebox.software/en/
 
 # App Default Values

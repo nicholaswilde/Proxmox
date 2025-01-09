@@ -2,8 +2,7 @@
 source ./misc/build.func
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: MickLesk (Canbiz)
-# License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://nextpvr.com/
 
 # App Default Values

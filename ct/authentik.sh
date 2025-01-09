@@ -2,8 +2,7 @@
 source ./misc/build.func
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: remz1337
-# License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 
 # App Default Values
 APP="Authentik"

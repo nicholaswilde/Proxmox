@@ -2,7 +2,7 @@
 source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/refs/heads/main/misc/build.func)
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: Michel Roegl-Brunner (michelroegl-brunner)
-# License: | MIT https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://guacamole.apache.org/
 
 #App Default Values
