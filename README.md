@@ -4,7 +4,7 @@
  </a>
 </div>
 <h1 align="center">Proxmox arm64 Install Scripts</h1>
-<h3 align="center">an unofficial port of tteck's Helper-Scripts to arm64!</h3>
+<h3 align="center">a port of the Promox VE Helper-Scripts to arm64!</h3>
 
 <p align="center">
   <a href="https://pimox-scripts.com">Website</a> | 
@@ -21,7 +21,7 @@
 
 ### About
 
-Ports of tteck's proxmox scripts to ARM64.
+Ports of the [Promox VE Helper Scripts](https://github.com/community-scripts/proxmoxve) to ARM64.
 
 Find the scripts in the website linked above.
 
