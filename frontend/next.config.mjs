@@ -15,11 +15,11 @@ const nextConfig = {
   },
 
   env: {
-    BASE_PATH: "ProxmoxVE",
+    BASE_PATH: "Proxmox",
   },
 
   output: "export",
-  basePath: `/ProxmoxVE`,
+  basePath: `/Proxmox`,
 };
 
 export default nextConfig;
