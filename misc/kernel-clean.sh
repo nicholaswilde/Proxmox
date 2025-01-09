@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-
-# Copyright (c) 2021-2024 tteck
-# Author: tteck (tteckster)
+# Copyright (c) 2021-2025 community-scripts ORG
+# Author: MickLesk
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
   clear
@@ -16,60 +15,66 @@ function header_info {
 
 EOF
 }
-YW=$(echo "\033[33m")
-RD=$(echo "\033[01;31m")
-GN=$(echo "\033[1;92m")
-CL=$(echo "\033[m")
-BFR="\\r\\033[K"
-HOLD="-"
-CM="${GN}✓${CL}"
+
+# Color variables
+YW="\033[33m"
+GN="\033[1;92m"
+RD="\033[01;31m"
+CL="\033[m"
+
+# Detect current kernel
 current_kernel=$(uname -r)
 available_kernels=$(dpkg --list | grep 'kernel-.*-pve' | awk '{print $2}' | grep -v "$current_kernel" | sort -V)
+
 header_info
 
-function msg_info() {
-  local msg="$1"
-  echo -ne " ${HOLD} ${YW}${msg}..."
-}
-
-function msg_ok() {
-  local msg="$1"
-  echo -e "${BFR} ${CM} ${GN}${msg}${CL}"
-}
-
-whiptail --backtitle "Proxmox VE Helper Scripts" --title "Proxmox VE Kernel Clean" --yesno "This will Clean Unused Kernel Images, USE AT YOUR OWN RISK. Proceed?" 10 68 || exit
 if [ -z "$available_kernels" ]; then
-  whiptail --backtitle "Proxmox VE Helper Scripts" --title "No Old Kernels" --msgbox "It appears there are no old Kernels on your system. \nCurrent kernel ($current_kernel)." 10 68
-  echo "Exiting..."
-  sleep 2
-  clear
-  exit
+  echo -e "${GN}No old kernels detected. Current kernel: ${current_kernel}${CL}"
+  exit 0
 fi
-  KERNEL_MENU=()
-  MSG_MAX_LENGTH=0
-while read -r TAG ITEM; do
-  OFFSET=2
-  ((${#ITEM} + OFFSET > MSG_MAX_LENGTH)) && MSG_MAX_LENGTH=${#ITEM}+OFFSET
-  KERNEL_MENU+=("$TAG" "$ITEM " "OFF")
-done < <(echo "$available_kernels")
 
-remove_kernels=$(whiptail --backtitle "Proxmox VE Helper Scripts" --title "Current Kernel $current_kernel" --checklist "\nSelect Kernels to remove:\n" 16 $((MSG_MAX_LENGTH + 58)) 6 "${KERNEL_MENU[@]}" 3>&1 1>&2 2>&3 | tr -d '"') || exit
-[ -z "$remove_kernels" ] && {
-  whiptail --backtitle "Proxmox VE Helper Scripts" --title "No Kernel Selected" --msgbox "It appears that no Kernel was selected" 10 68
-  echo "Exiting..."
-  sleep 2
-  clear
-  exit
-}
-whiptail --backtitle "Proxmox VE Helper Scripts" --title "Remove Kernels" --yesno "Would you like to remove the $(echo $remove_kernels | awk '{print NF}') previously selected Kernels?" 10 68 || exit
+echo -e "${YW}Available kernels for removal:${CL}"
+echo "$available_kernels" | nl -w 2 -s '. '
 
-msg_info "Removing ${CL}${RD}$(echo $remove_kernels | awk '{print NF}') ${CL}${YW}old Kernels${CL}"
-/usr/bin/apt purge -y $remove_kernels >/dev/null 2>&1
-msg_ok "Successfully Removed Kernels"
+echo -e "\n${YW}Select kernels to remove (comma-separated, e.g., 1,2):${CL}"
+read -r selected
 
-msg_info "Updating GRUB"
-/usr/sbin/update-grub >/dev/null 2>&1
-msg_ok "Successfully Updated GRUB"
-msg_info "Exiting"
-sleep 2
-msg_ok "Finished"
+# Parse selection
+IFS=',' read -r -a selected_indices <<< "$selected"
+kernels_to_remove=()
+
+for index in "${selected_indices[@]}"; do
+  kernel=$(echo "$available_kernels" | sed -n "${index}p")
+  if [ -n "$kernel" ]; then
+    kernels_to_remove+=("$kernel")
+  fi
+done
+
+if [ ${#kernels_to_remove[@]} -eq 0 ]; then
+  echo -e "${RD}No valid selection made. Exiting.${CL}"
+  exit 1
+fi
+
+# Confirm removal
+echo -e "${YW}Kernels to be removed:${CL}"
+printf "%s\n" "${kernels_to_remove[@]}"
+read -rp "Proceed with removal? (y/n): " confirm
+if [[ "$confirm" != "y" ]]; then
+  echo -e "${RD}Aborted.${CL}"
+  exit 1
+fi
+
+# Remove kernels
+for kernel in "${kernels_to_remove[@]}"; do
+  echo -e "${YW}Removing $kernel...${CL}"
+  if apt-get purge -y "$kernel" >/dev/null 2>&1; then
+    echo -e "${GN}Successfully removed: $kernel${CL}"
+  else
+    echo -e "${RD}Failed to remove: $kernel. Check dependencies.${CL}"
+  fi
+done
+
+# Clean up and update GRUB
+echo -e "${YW}Cleaning up...${CL}"
+apt-get autoremove -y >/dev/null 2>&1 && update-grub >/dev/null 2>&1
+echo -e "${GN}Cleanup and GRUB update complete.${CL}"

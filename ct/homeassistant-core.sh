@@ -1,58 +1,33 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/build.func)
-# Copyright (c) 2021-2024 tteck
+source ./misc/build.func
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
-# License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
+# Source: https://www.home-assistant.io/
 
-function header_info {
-  clear
-  cat <<"EOF"
-                                _           _     _              _       ___               
-  /\  /\___  _ __ ___   ___    /_\  ___ ___(_)___| |_ __ _ _ __ | |_    / __\___  _ __ ___ 
- / /_/ / _ \| '_ ` _ \ / _ \  //_\\/ __/ __| / __| __/ _` | '_ \| __|  / /  / _ \| '__/ _ \
-/ __  / (_) | | | | | |  __/ /  _  \__ \__ \ \__ \ || (_| | | | | |_  / /__| (_) | | |  __/
-\/ /_/ \___/|_| |_| |_|\___| \_/ \_/___/___/_|___/\__\__,_|_| |_|\__| \____/\___/|_|  \___|
-                                                                                           
-EOF
-}
-header_info
-echo -e "Loading..."
+# App Default Values
 APP="Home Assistant-Core"
-var_disk="8"
+var_tags="automation;smarthome"
 var_cpu="2"
 var_ram="1024"
+var_disk="8"
 var_os="ubuntu"
 var_version="24.04"
+var_unprivileged="1"
+
+# App Output & Base Settings
+header_info "$APP"
+base_settings
+
+# Core
 variables
 color
 catch_errors
 
-function default_settings() {
-  CT_TYPE="1"
-  PW=""
-  CT_ID=$NEXTID
-  HN=$NSAPP
-  DISK_SIZE="$var_disk"
-  CORE_COUNT="$var_cpu"
-  RAM_SIZE="$var_ram"
-  BRG="vmbr0"
-  NET="dhcp"
-  GATE=""
-  APT_CACHER=""
-  APT_CACHER_IP=""
-  DISABLEIP6="no"
-  MTU=""
-  SD=""
-  NS=""
-  MAC=""
-  VLAN=""
-  SSH="no"
-  VERB="no"
-  echo_default
-}
-
 function update_script() {
+  header_info
+  check_container_storage
+  check_container_resources
   if [[ ! -d /srv/homeassistant ]]; then
     msg_error "No ${APP} Installation Found!"
     exit
@@ -64,7 +39,6 @@ function update_script() {
     "2" "Install HACS" OFF \
     "3" "Install FileBrowser" OFF \
     3>&1 1>&2 2>&3)
-  header_info
   if [ "$UPD" == "1" ]; then
     if (whiptail --backtitle "Proxmox VE Helper Scripts" --defaultno --title "SELECT BRANCH" --yesno "Use Beta Branch?" 10 58); then
       clear
@@ -77,7 +51,9 @@ function update_script() {
       echo -e "${GN}Updating to Stable Version${CL}"
       BR=""
     fi
-    if [[ "$PY" == "python3.11" ]]; then echo -e "⚠️  Home Assistant will soon require Python 3.12."; fi
+    if [[ "$PY" =~ ^python3\.(11|12)\.[0-9]+$ ]]; then
+    echo -e "⚠️  Home Assistant will soon require Python 3.13.x";
+    fi
 
     msg_info "Stopping Home Assistant"
     systemctl stop homeassistant
@@ -111,13 +87,13 @@ function update_script() {
     read -r -p "Would you like to use No Authentication? <y/N> " prompt
     msg_info "Installing FileBrowser"
     RELEASE=$(curl -fsSL https://api.github.com/repos/filebrowser/filebrowser/releases/latest | grep -o '"tag_name": ".*"' | sed 's/"//g' | sed 's/tag_name: //g')
-    curl -fsSL https://github.com/filebrowser/filebrowser/releases/download/$RELEASE/linux-arm64-filebrowser.tar.gz | tar -xzv -C /usr/local/bin &>/dev/null
+    curl -fsSL https://github.com/filebrowser/filebrowser/releases/download/$RELEASE/linux-amd64-filebrowser.tar.gz | tar -xzv -C /usr/local/bin &>/dev/null
 
     if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
       filebrowser config init -a '0.0.0.0' &>/dev/null
       filebrowser config set -a '0.0.0.0' &>/dev/null
       filebrowser config set --auth.method=noauth &>/dev/null
-      filebrowser users add ID 1 --perm.admin &>/dev/null  
+      filebrowser users add ID 1 --perm.admin &>/dev/null
     else
       filebrowser config init -a '0.0.0.0' &>/dev/null
       filebrowser config set -a '0.0.0.0' &>/dev/null
@@ -152,5 +128,6 @@ build_container
 description
 
 msg_ok "Completed Successfully!\n"
-echo -e "${APP} should be reachable by going to the following URL.
-         ${BL}http://${IP}:8123${CL}"
+echo -e "${CREATING}${GN}${APP} setup has been successfully initialized!${CL}"
+echo -e "${INFO}${YW} Access it using the following URL:${CL}"
+echo -e "${TAB}${GATEWAY}${BGN}http://${IP}:8123${CL}"

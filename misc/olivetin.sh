@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
 clear
@@ -51,10 +51,10 @@ function msg_ok() {
 }
 
 msg_info "Installing ${APP}"
-wget -q https://github.com/OliveTin/OliveTin/releases/download/2024.04.11/OliveTin_linux_arm64.deb
-dpkg -i OliveTin_linux_arm64.deb &>/dev/null
+wget -q https://github.com/OliveTin/OliveTin/releases/latest/download/OliveTin_linux_amd64.deb
+dpkg -i OliveTin_linux_amd64.deb &>/dev/null
 systemctl enable --now OliveTin &>/dev/null
-rm OliveTin_linux_arm64.deb
+rm OliveTin_linux_amd64.deb
 msg_ok "Installed ${APP} on $hostname"
 
 msg_ok "Completed Successfully!\n"

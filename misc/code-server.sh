@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
     cat <<"EOF"
@@ -46,7 +46,7 @@ function error_exit() {
 }
 clear
 header_info
-if command -v pveversion >/dev/null 2>&1; then echo -e "⚠️  Can't Install on Proxmox Host"; exit; fi
+if command -v pveversion >/dev/null 2>&1; then echo -e "⚠️  Can't Install on Proxmox "; exit; fi
 if [ -e /etc/alpine-release ]; then echo -e "⚠️  Can't Install on Alpine"; exit; fi
 while true; do
     read -p "This will Install ${APP} on $hostname. Proceed(y/n)?" yn
@@ -71,7 +71,6 @@ msg_info "Installing Dependencies"
 apt-get update &>/dev/null
 apt-get install -y curl &>/dev/null
 apt-get install -y git &>/dev/null
-apt-get install -y wget &>/dev/null
 msg_ok "Installed Dependencies"
 
 VERSION=$(curl -s https://api.github.com/repos/coder/code-server/releases/latest |
@@ -79,9 +78,9 @@ VERSION=$(curl -s https://api.github.com/repos/coder/code-server/releases/latest
     awk '{print substr($2, 3, length($2)-4) }')
 
 msg_info "Installing Code-Server v${VERSION}"
-curl -fOL https://github.com/coder/code-server/releases/download/v$VERSION/code-server_${VERSION}_arm64.deb &>/dev/null
-dpkg -i code-server_${VERSION}_arm64.deb &>/dev/null
-rm -rf code-server_${VERSION}_arm64.deb
+curl -fOL https://github.com/coder/code-server/releases/download/v$VERSION/code-server_${VERSION}_amd64.deb &>/dev/null
+dpkg -i code-server_${VERSION}_amd64.deb &>/dev/null
+rm -rf code-server_${VERSION}_amd64.deb
 mkdir -p ~/.config/code-server/
 systemctl enable -q --now code-server@$USER
 cat <<EOF >~/.config/code-server/config.yaml

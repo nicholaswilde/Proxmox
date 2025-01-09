@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
     clear
@@ -67,7 +67,7 @@ read -r -p "Would you like to use No Authentication? <y/N> " prompt
 msg_info "Installing ${APP}"
 apt-get install -y curl &>/dev/null
 RELEASE=$(curl -fsSL https://api.github.com/repos/filebrowser/filebrowser/releases/latest | grep -o '"tag_name": ".*"' | sed 's/"//g' | sed 's/tag_name: //g')
-curl -fsSL https://github.com/filebrowser/filebrowser/releases/download/$RELEASE/linux-arm64-filebrowser.tar.gz | tar -xzv -C /usr/local/bin &>/dev/null
+curl -fsSL https://github.com/filebrowser/filebrowser/releases/download/$RELEASE/linux-amd64-filebrowser.tar.gz | tar -xzv -C /usr/local/bin &>/dev/null
 
 if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
   filebrowser config init -a '0.0.0.0' &>/dev/null
