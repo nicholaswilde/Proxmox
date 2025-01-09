@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 source ./misc/build.func
 # Source: https://github.com/gristlabs/grist-core
+# Author: tteck (tteckster)
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 
 # App Default Values

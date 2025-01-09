@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 source ./misc/build.func
-
 # Copyright (c) 2021-2025 community-scripts ORG
-# Author: Nícolas Pastorello (opastorello)
+# Author: tteck (tteckster)
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 
 # App Default Values

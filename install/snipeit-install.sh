@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-
-
 #Copyright (c) 2021-2025 community-scripts ORG
-# Author: Michel Roegl-Brunner (michelroegl-brunner)
+# Author: tteck (tteckster)
 # License: MIT
 # https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
