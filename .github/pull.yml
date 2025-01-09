@@ -1,9 +1,0 @@
-version: "1"
-rules:
-  - base: main
-    upstream: tteck:main
-    mergeMethod: merge # [none, merge, squash, rebase, hardreset]
-    conflictReviewers:
-      - asylumexp
-label: ":arrow_heading_down: pull"
-conflictLabel: "merge-conflict"
