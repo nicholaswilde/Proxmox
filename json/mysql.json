@@ -39,5 +39,6 @@
             "text": "With an option to install the MySQL 8.4 LTS release instead of MySQL 8.0",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u274c"
 }

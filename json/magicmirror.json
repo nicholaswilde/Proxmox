@@ -35,5 +35,6 @@
             "text": "Configuration Path: `/opt/magicmirror/config/config.js`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

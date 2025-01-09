@@ -54,5 +54,6 @@
             "text": "Options to Install Portainer and/or Docker Compose V2",
             "type": "warning"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

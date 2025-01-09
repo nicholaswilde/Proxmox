@@ -35,5 +35,6 @@
             "text": "Adguard Home can be updated via the user interface.",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

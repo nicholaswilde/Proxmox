@@ -35,5 +35,6 @@
             "text": "Add Calibre-Web Extras via `update`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

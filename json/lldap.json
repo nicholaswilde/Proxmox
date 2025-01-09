@@ -30,5 +30,6 @@
         "username": "admin",
         "password": "password"
     },
-    "notes": []
+    "notes": [],
+    "status": "\u274c"
 }

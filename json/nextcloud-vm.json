@@ -35,5 +35,6 @@
             "text": "This VM requires extra installation steps, see install guide at `https://github.com/community-scripts/ProxmoxVE/discussions/144`",
             "type": "warning"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

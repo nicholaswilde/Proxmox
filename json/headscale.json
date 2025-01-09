@@ -35,5 +35,6 @@
             "text": "Configuration settings: `/etc/headscale/config.yaml`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

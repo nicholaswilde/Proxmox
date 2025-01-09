@@ -43,5 +43,6 @@
             "text": "Portainer Interface: LXC-IP: 9443",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

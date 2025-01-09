@@ -28,7 +28,8 @@
     ],
     "default_credentials": {
         "username": null,
-        "password":  null
+        "password": null
     },
-    "notes": []
+    "notes": [],
+    "status": "\ud83d\udea7"
 }

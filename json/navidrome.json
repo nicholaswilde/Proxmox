@@ -35,5 +35,6 @@
             "text": "To change Navidrome music folder path, `nano /var/lib/navidrome/navidrome.toml`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

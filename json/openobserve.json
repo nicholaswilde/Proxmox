@@ -35,5 +35,6 @@
             "text": "Show Login Credentials: `cat /opt/openobserve/data/.env`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

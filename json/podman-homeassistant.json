@@ -43,5 +43,6 @@
             "text": "config path: `/var/lib/containers/storage/volumes/hass_config/_data`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

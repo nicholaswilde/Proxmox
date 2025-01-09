@@ -35,5 +35,6 @@
             "text": "First start of the service can take some time due to certificate generation.",
             "type": "warn"
         }
-    ]
+    ],
+    "status": "\ud83d\udea7"
 }

@@ -35,5 +35,6 @@
             "text": "Configuration Path: `/etc/OliveTin/config.yaml`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

@@ -41,5 +41,6 @@
         "username": "admin",
         "password": "admin"
     },
-    "notes": []
+    "notes": [],
+    "status": "\u2705"
 }

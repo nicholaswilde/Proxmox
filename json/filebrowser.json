@@ -35,5 +35,6 @@
             "text": "Execute within an existing LXC Console",
             "type": "warning"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

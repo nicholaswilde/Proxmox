@@ -35,5 +35,6 @@
             "text": "Set a root password if using autologin. This will be the Cockpit password.`sudo passwd root`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

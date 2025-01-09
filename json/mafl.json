@@ -35,5 +35,6 @@
             "text": "Configuration Path: `/opt/mafl/data/config.yml`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

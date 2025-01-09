@@ -2,7 +2,7 @@
     "name": "The Lounge",
     "slug": "the-lounge",
     "categories": [
-      0
+        0
     ],
     "date_created": "2024-11-28",
     "type": "ct",
@@ -14,26 +14,27 @@
     "logo": "https://raw.githubusercontent.com/thelounge/thelounge.github.io/master/assets/logos/logo/TL_Grey%26Yellow_Vertical_logotype_Transparent_Bg/TL_Grey%26Yellow_Vertical_logotype_Transparent_Bg.png",
     "description": "Modern web IRC client designed for self-hosting ",
     "install_methods": [
-      {
-        "type": "default",
-        "script": "ct/the-lounge.sh",
-        "resources": {
-          "cpu": 2,
-          "ram": 2048,
-          "hdd": 4,
-          "os": "ubuntu",
-          "version": "24.04"
+        {
+            "type": "default",
+            "script": "ct/the-lounge.sh",
+            "resources": {
+                "cpu": 2,
+                "ram": 2048,
+                "hdd": 4,
+                "os": "ubuntu",
+                "version": "24.04"
+            }
         }
-      }
     ],
     "default_credentials": {
-      "username": null,
-      "password": null
+        "username": null,
+        "password": null
     },
     "notes": [
-      {
-        "text": "The Lounge is running in private mode. Use `sudo -u thelounge thelounge add name` to create users.",
-        "type": "info"
-      }
-    ]
-  }
+        {
+            "text": "The Lounge is running in private mode. Use `sudo -u thelounge thelounge add name` to create users.",
+            "type": "info"
+        }
+    ],
+    "status": "\ud83d\udea7"
+}

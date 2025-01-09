@@ -35,5 +35,6 @@
             "text": "Show Login Credentials: `cat CouchDB.creds`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

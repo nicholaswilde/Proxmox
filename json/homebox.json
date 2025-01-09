@@ -35,5 +35,6 @@
             "text": ".env file location: `/opt/.env`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

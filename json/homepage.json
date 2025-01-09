@@ -35,5 +35,6 @@
             "text": "Configuration (bookmarks.yaml, services.yaml, widgets.yaml) path: `/opt/homepage/config/`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

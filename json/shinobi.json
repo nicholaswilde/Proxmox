@@ -30,5 +30,6 @@
         "username": "admin@shinobi.video",
         "password": "admin"
     },
-    "notes": []
+    "notes": [],
+    "status": "\u2705"
 }

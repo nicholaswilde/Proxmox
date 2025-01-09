@@ -35,5 +35,6 @@
             "text": "Unbound Configuration Path: `/etc/unbound/unbound.conf.d/unbound.conf`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\ud83d\udea7"
 }

@@ -63,5 +63,6 @@
             "text": "Monitor-All logs: `cat /var/log/ping-instances.log`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\ud83e\uddea"
 }

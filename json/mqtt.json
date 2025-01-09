@@ -35,5 +35,6 @@
             "text": "You can find post-install info here: `https://github.com/community-scripts/ProxmoxVE/discussions/782`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

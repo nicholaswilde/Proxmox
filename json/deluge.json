@@ -30,5 +30,6 @@
         "username": null,
         "password": "deluge"
     },
-    "notes": []
+    "notes": [],
+    "status": "\u2705"
 }

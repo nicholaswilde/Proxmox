@@ -35,5 +35,6 @@
             "text": "Show Login Credentials, type `update` in the LXC console",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

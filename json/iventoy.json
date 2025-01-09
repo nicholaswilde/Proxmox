@@ -35,5 +35,6 @@
             "text": "Container must be privileged.",
             "type": "warning"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

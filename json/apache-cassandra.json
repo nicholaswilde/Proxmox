@@ -35,5 +35,6 @@
             "text": "Apache-Cassandra Configuration: `nano /etc/cassandra/cassandra.yaml`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

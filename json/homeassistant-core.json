@@ -47,5 +47,6 @@
             "text": "config path: `/root/.homeassistant`",
             "type": "info"
         }
-    ]
+    ],
+    "status": "\u2705"
 }

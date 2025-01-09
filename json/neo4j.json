@@ -30,5 +30,6 @@
         "username": "neo4j",
         "password": "neo4j"
     },
-    "notes": []
+    "notes": [],
+    "status": "\u2705"
 }

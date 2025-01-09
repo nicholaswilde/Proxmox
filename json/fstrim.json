@@ -39,5 +39,6 @@
             "text": "This is designed to work with SSDs on ext4 filesystems only.",
             "type": "warning"
         }
-    ]
+    ],
+    "status": "\u2705"
 }
