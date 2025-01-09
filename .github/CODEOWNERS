@@ -11,7 +11,5 @@
 
 
 # Set default reviewers
-*                                                                           @community-scripts/Contributor
+*                                                                           @asylumexp
 
-# All changes in frontend
-/frontend/                                                                  @community-scripts/Frontend-Dev
