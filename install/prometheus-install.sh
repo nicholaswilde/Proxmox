@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
+# Copyright (c) 2021-2025 community-scripts ORG
 # Author: tteck (tteckster)
-# License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# Source: https://prometheus.io/
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
@@ -14,11 +14,12 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y curl
-$STD apt-get install -y sudo
-$STD apt-get install -y mc
-$STD apt-get install -y wget
-$STD apt-get install -y openssh-server
+$STD apt-get install -y \
+  curl \
+  sudo \
+  mc \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Prometheus"
@@ -27,14 +28,13 @@ mkdir -p /etc/prometheus
 mkdir -p /var/lib/prometheus
 wget -q https://github.com/prometheus/prometheus/releases/download/v${RELEASE}/prometheus-${RELEASE}.linux-arm64.tar.gz
 tar -xf prometheus-${RELEASE}.linux-arm64.tar.gz
-cd prometheus-${RELEASE}.linux-arm64
-mv prometheus promtool /usr/local/bin/
-mv prometheus.yml /etc/prometheus/prometheus.yml
+mv prometheus-${RELEASE}.linux-arm64/prometheus prometheus-${RELEASE}.linux-arm64/promtool /usr/local/bin/
+mv prometheus-${RELEASE}.linux-arm64/prometheus.yml /etc/prometheus/prometheus.yml
 echo "${RELEASE}" >/opt/${APPLICATION}_version.txt
 msg_ok "Installed Prometheus"
 
 msg_info "Creating Service"
-service_path="/etc/systemd/system/prometheus.service"
+cat <<EOF >/etc/systemd/system/prometheus.service"
 echo "[Unit]
 Description=Prometheus
 Wants=network-online.target
@@ -50,7 +50,8 @@ ExecStart=/usr/local/bin/prometheus \
     --web.listen-address=0.0.0.0:9090
 
 [Install]
-WantedBy=multi-user.target" >$service_path
+WantedBy=multi-user.target"
+EOF
 systemctl enable -q --now prometheus
 msg_ok "Created Service"
 
@@ -60,5 +61,5 @@ customize
 msg_info "Cleaning up"
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
-rm -rf ../prometheus-${RELEASE}.linux-arm64 ../prometheus-${RELEASE}.linux-arm64.tar.gz
+rm -rf prometheus-${RELEASE}.linux-arm64 prometheus-${RELEASE}.linux-arm64.tar.gz
 msg_ok "Cleaned"

@@ -14,12 +14,16 @@ network_check
 update_os
 
 msg_info "Installing Dependencies"
-$STD apt-get install -y curl
-$STD apt-get install -y sudo
-$STD apt-get install -y mc
-$STD apt-get install -y gpg
-$STD apt-get install -y git
-$STD apt-get install -y openssh-server
+$STD apt-get install -y \
+  curl \
+  sudo \
+  mc \
+  gpg \
+  git \
+  jq \
+  build-essential \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up Node.js Repository"
@@ -34,13 +38,18 @@ $STD apt-get install -y nodejs
 $STD npm install --global yarn
 msg_ok "Installed Node.js"
 
-msg_info "Installing Actual Budget"
-$STD git clone https://github.com/actualbudget/actual-server.git /opt/actualbudget
+RELEASE=$(curl -s https://api.github.com/repos/actualbudget/actual-server/tags | jq --raw-output '.[0].name')
+msg_info "Installing Actual Budget $RELEASE"
+wget -q https://codeload.github.com/actualbudget/actual-server/legacy.tar.gz/refs/tags/${RELEASE} -O - | tar -xz
+mv actualbudget-actual-server-* /opt/actualbudget
 mkdir -p /opt/actualbudget/server-files
+mkdir -p /opt/actualbudget-data
 chown -R root:root /opt/actualbudget/server-files
 chmod 755 /opt/actualbudget/server-files
 cat <<EOF > /opt/actualbudget/.env
 ACTUAL_UPLOAD_DIR=/opt/actualbudget/server-files
+ACTUAL_DATA_DIR=/opt/actualbudget-data
+ACTUAL_SERVER_FILES_DIR=/opt/actualbudget/server-files
 PORT=5006
 EOF
 cd /opt/actualbudget
