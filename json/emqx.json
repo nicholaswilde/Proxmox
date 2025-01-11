@@ -32,9 +32,9 @@
     },
     "notes": [
         {
-            "text": "Setup-Steps: Access Control \u00e2\u017e\u00a1 Authentication \u00e2\u017e\u00a1 Create \u00e2\u017e\u00a1 Next \u00e2\u017e\u00a1 Next \u00e2\u017e\u00a1 Create \u00e2\u017e\u00a1 Users \u00e2\u017e\u00a1 Add \u00e2\u017e\u00a1 Username / Password (to authenicate with MQTT) \u00e2\u017e\u00a1 Save. You're now ready to enjoy a high-performance MQTT Broker.",
+            "text": "Setup-Steps: Access Control âž¡ Authentication âž¡ Create âž¡ Next âž¡ Next âž¡ Create âž¡ Users âž¡ Add âž¡ Username / Password (to authenicate with MQTT) âž¡ Save. You're now ready to enjoy a high-performance MQTT Broker.",
             "type": "info"
         }
     ],
-    "status": "\u2705"
+    "status": "✅"
 }

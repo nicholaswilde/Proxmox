@@ -12,7 +12,7 @@
     "documentation": "https://netboxlabs.com/docs/netbox/en/stable/",
     "website": "https://netboxlabs.com/",
     "logo": "https://github.com/netbox-community/netbox/wiki/images/logos/netbox_icon.svg",
-    "description": "NetBox is the source of truth for everything on your network, from physical components like power systems and cabling to virtual assets like IP addresses and VLANs. Network automation and observability tools depend on NetBox\u2019s authoritative data to roll out configurations, monitor changes, and accelerate operations across the enterprise",
+    "description": "NetBox is the source of truth for everything on your network, from physical components like power systems and cabling to virtual assets like IP addresses and VLANs. Network automation and observability tools depend on NetBox’s authoritative data to roll out configurations, monitor changes, and accelerate operations across the enterprise",
     "install_methods": [
         {
             "type": "default",
@@ -36,5 +36,5 @@
             "type": "info"
         }
     ],
-    "status": "\ud83d\udea7"
+    "status": "🚧"
 }
