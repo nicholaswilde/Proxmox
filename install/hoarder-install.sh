@@ -38,8 +38,8 @@ msg_ok "Installed Additional Tools"
 
 msg_info "Installing Meilisearch"
 cd /tmp
-wget -q https://github.com/meilisearch/meilisearch/releases/latest/download/meilisearch.deb
-$STD dpkg -i meilisearch.deb
+wget -q https://github.com/meilisearch/meilisearch/releases/latest/download/meilisearch-aarch64.deb
+$STD dpkg -i meilisearch-aarch64.deb
 wget -q https://raw.githubusercontent.com/meilisearch/meilisearch/latest/config.toml -O /etc/meilisearch.toml
 MASTER_KEY=$(openssl rand -base64 12)
 sed -i \
@@ -176,7 +176,7 @@ motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf /tmp/meilisearch.deb
+rm -rf /tmp/meilisearch-aarch64.deb
 rm -f /opt/v${RELEASE}.zip
 $STD apt-get autoremove -y
 $STD apt-get autoclean -y

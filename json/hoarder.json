@@ -30,6 +30,9 @@
         "username": null,
         "password": null
     },
-    "notes": [],
-    "status": "🚧"
+    "notes": [{
+        "text": "No arm64 version of dependency available",
+        "type": "warning"
+    }],
+    "status": "❌"
 }

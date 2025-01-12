@@ -30,6 +30,9 @@
         "username": null,
         "password": null
     },
-    "notes": [],
-    "status": "🚧"
+    "notes": [{
+        "text": "No ARM64 package available",
+        "type": "warning"
+    }],
+    "status": "❌"
 }
