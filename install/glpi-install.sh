@@ -24,7 +24,8 @@ $STD apt-get install -y \
   libapache2-mod-php \
   mariadb-server \
   wget \
-  openssh-server
+  openssh-server \
+  cron
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up database"
