@@ -34,7 +34,11 @@
         {
             "text": "Login Credentials : `cat ~/checkmk.creds`",
             "type": "info"
+        },
+        {
+            "text": "No ARM64 image: https://ideas.checkmk.com/suggestions/297317/arm-support-for-the-cee-and-cme",
+            "type": "info"
         }
     ],
-    "status": "🚧"
+    "status": "❌"
 }

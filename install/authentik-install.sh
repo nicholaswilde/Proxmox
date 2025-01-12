@@ -43,14 +43,14 @@ msg_ok "Installed Dependencies"
 msg_info "Installing yq"
 cd /tmp
 YQ_LATEST="$(wget -qO- "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"
-wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_LATEST}/yq_linux_amd64" -qO /usr/bin/yq
+wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_LATEST}/yq_linux_arm64" -qO /usr/bin/yq
 chmod +x /usr/bin/yq
 msg_ok "Installed yq"
 
 msg_info "Installing GeoIP"
 cd /tmp
 GEOIP_RELEASE=$(curl -s https://api.github.com/repos/maxmind/geoipupdate/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-wget -qO geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v${GEOIP_RELEASE}/geoipupdate_${GEOIP_RELEASE}_linux_amd64.deb
+wget -qO geoipupdate.deb https://github.com/maxmind/geoipupdate/releases/download/v${GEOIP_RELEASE}/geoipupdate_${GEOIP_RELEASE}_linux_arm64.deb
 $STD dpkg -i geoipupdate.deb
 cat <<EOF >/etc/GeoIP.conf
 #GEOIPUPDATE_EDITION_IDS="GeoLite2-City GeoLite2-ASN"
