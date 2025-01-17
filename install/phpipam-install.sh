@@ -21,7 +21,9 @@ $STD apt-get install -y \
   apache2 \
   libapache2-mod-php \
   php8.2 php8.2-{fpm,curl,cli,mysql,gd,intl,imap,apcu,pspell,tidy,xmlrpc,mbstring,gmp,xml,ldap,common,snmp} \
-  php-pear
+  php-pear \
+  wget \
+  openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Setting up MariaDB"

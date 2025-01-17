@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: Jonathan (jd-apprentice)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -41,12 +41,12 @@ function update_script() {
   if [[ ! -f /opt/${APP}_version.txt ]] || [[ "${RELEASE}" != "$(cat /opt/${APP}_version.txt)" ]]; then
     msg_info "Updating ${APP} to v${RELEASE}"
     cd /opt
-    wget -qO "https://github.com/thomiceli/opengist/releases/download/v${RELEASE}/opengist${RELEASE}-linux-amd64.tar.gz"
+    wget -qO "https://github.com/thomiceli/opengist/releases/download/v${RELEASE}/opengist${RELEASE}-linux-arm64.tar.gz"
     rm -rf /opt/opengist
-    tar -xzf opengist${RELEASE}-linux-amd64.tar.gz
+    tar -xzf opengist${RELEASE}-linux-arm64.tar.gz
     chmod +x /opt/opengist/opengist
     echo "${RELEASE}" >"/opt/${APP}_version.txt"
-    rm -rf /opt/opengist${RELEASE}-linux-amd64.tar.gz
+    rm -rf /opt/opengist${RELEASE}-linux-arm64.tar.gz
     apt-get -y autoremove &>/dev/null
     apt-get -y autoclean &>/dev/null
     msg_ok "Updated ${APP} LXC"
