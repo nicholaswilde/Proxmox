@@ -6,7 +6,7 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # Source: https://runtipi.io/
 
 # App Default Values
-APP="Beszel Hub"
+APP="Beszel-Hub"
 var_tags="os"
 var_cpu="2"
 var_ram="2048"
