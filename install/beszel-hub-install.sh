@@ -26,7 +26,6 @@ mkdir /opt/beszel
 curl -sL https://raw.githubusercontent.com/henrygd/beszel/main/supplemental/scripts/install-hub.sh -o install.sh
 chmod +x install.sh
 $STD ./install.sh
-chmod 666 /opt/runtipi/state/settings.json
 msg_ok "Installed Beszel Hub"
 
 motd_ssh
