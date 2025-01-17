@@ -7,7 +7,7 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 
 # App Default Values
 APP="LubeLogger"
-var_tags="verhicle;car"
+var_tags="vehicle;car"
 var_cpu="1"
 var_ram="512"
 var_disk="2"

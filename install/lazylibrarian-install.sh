@@ -36,6 +36,7 @@ rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
 $STD pip install jaraco.stream
 $STD pip install python-Levenshtein
 $STD pip install soupsieve
+$STD pip install pypdf
 msg_ok "Installed Python3 Dependencies"
 
 msg_info "Installing LazyLibrarian"
