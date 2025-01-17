@@ -11,7 +11,7 @@
     "interface_port": 8090,
     "documentation": null,
     "website": "https://beszel.dev",
-    "logo": "https://runtipi.io/_next/static/media/tipi.c0b9b68e.png",
+    "logo": "https://beszel.dev/icon.svg",
     "description": "Beszel is a lightweight server monitoring platform that includes Docker statistics, historical data, and alert functions.",
     "install_methods": [
         {
