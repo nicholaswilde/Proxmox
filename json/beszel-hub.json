@@ -1,0 +1,35 @@
+{
+    "name": "Beszel Hub",
+    "slug": "beszel-hub",
+    "categories": [
+        8
+    ],
+    "date_created": "2025-01-18",
+    "type": "ct",
+    "updateable": true,
+    "privileged": false,
+    "interface_port": 8090,
+    "documentation": null,
+    "website": "https://beszel.dev",
+    "logo": "https://runtipi.io/_next/static/media/tipi.c0b9b68e.png",
+    "description": "Beszel is a lightweight server monitoring platform that includes Docker statistics, historical data, and alert functions.",
+    "install_methods": [
+        {
+            "type": "default",
+            "script": "ct/beszel-hub.sh",
+            "resources": {
+                "cpu": 2,
+                "ram": 2048,
+                "hdd": 8,
+                "os": "debian",
+                "version": "12"
+            }
+        }
+    ],
+    "default_credentials": {
+        "username": null,
+        "password": null
+    },
+    "notes": [],
+    "status": "✅"
+}
