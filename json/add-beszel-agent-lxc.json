@@ -16,7 +16,7 @@
     "install_methods": [
         {
             "type": "default",
-            "script": "misc/add-bezsel-agent-lxc.sh",
+            "script": "misc/add-beszel-agent-lxc.sh",
             "resources": {
                 "cpu": null,
                 "ram": null,
