@@ -22,7 +22,8 @@ $STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Beszel Hub"
-cd /opt
+mkdir /opt/beszel
+cd /opt/beszel
 curl -sL https://raw.githubusercontent.com/henrygd/beszel/main/supplemental/scripts/install-hub.sh -o install.sh
 chmod +x install.sh
 $STD ./install.sh
