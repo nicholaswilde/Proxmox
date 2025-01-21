@@ -778,6 +778,7 @@ check_container_storage() {
 
 start() {
   if command -v pveversion >/dev/null 2>&1; then
+    apt-get install -y whiptail
     if ! (whiptail --backtitle "Proxmox VE Helper Scripts" --title "${APP} LXC" --yesno "This will create a New ${APP} LXC. Proceed?" 10 58); then
       clear
       exit_script
